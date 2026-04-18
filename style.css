@@ -411,29 +411,24 @@ code {
 }
 .resource-link:hover { background: #e8f8fa; border-color: var(--link); }
 
-/* ── Video grid — portrait phone recordings ── */
+/* ── Video list — one per row ── */
 .video-grid {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
   gap: 24px;
   margin-top: 16px;
 }
 .video-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  width: 240px;
+  gap: 8px;
 }
 .video-label {
   font-size: 0.85rem;
   font-weight: 700;
   color: var(--text);
-  text-align: center;
 }
 .video-wrap {
-  width: 240px;
   border-radius: 10px;
   overflow: hidden;
   background: #000;
