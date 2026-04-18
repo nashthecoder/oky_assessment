@@ -3,8 +3,95 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Oky — Technical Assessment</title>
+  <title>Naijeria Toweett — Oky Technology Advisory Consultant · UNICEF DCOE</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .cta-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 22px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--white);
+      color: var(--danger);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 10px 22px;
+      border-radius: 24px;
+      text-decoration: none;
+      transition: opacity 0.15s;
+      white-space: nowrap;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-ghost {
+      background: rgba(255,255,255,0.18);
+      color: var(--white);
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 10px 20px;
+      border-radius: 24px;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.35);
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.28); }
+
+    /* Deliverable map */
+    .del-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .del-card {
+      background: var(--nav);
+      border-radius: 12px;
+      padding: 16px 18px;
+      border-left: 3px solid var(--border);
+    }
+    .del-card.green  { border-left-color: var(--primary); }
+    .del-card.blue   { border-left-color: var(--tertiary); }
+    .del-card.orange { border-left-color: var(--secondary); }
+    .del-card.pink   { border-left-color: var(--danger); }
+    .del-exp { font-size: 0.85rem; font-weight: 700; color: #222; margin-bottom: 4px; }
+    .del-desc { font-size: 0.8rem; color: #666; line-height: 1.5; margin-bottom: 10px; }
+    .del-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .del-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: rgba(61,164,221,0.12);
+      color: var(--tertiary);
+      border-radius: 6px;
+      padding: 2px 8px;
+      letter-spacing: 0.03em;
+    }
+    .del-tag.green {
+      background: rgba(151,200,0,0.13);
+      color: var(--primary-dark);
+    }
+
+    /* Task card override — make Task 1 feel primary */
+    .task-card.featured {
+      border-top-width: 5px;
+      position: relative;
+    }
+    .task-card.featured::after {
+      content: 'Start here';
+      position: absolute;
+      top: -1px;
+      right: 18px;
+      background: var(--primary);
+      color: var(--white);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 0 0 8px 8px;
+    }
+  </style>
 </head>
 <body>
 
@@ -23,57 +110,171 @@
 
   <div class="page">
 
+    <!-- Hero -->
     <div class="hero">
-      <h1>Assessment Overview</h1>
-      <p>White-label React Native app for period tracking — used by girls aged 10 and above across multiple countries.</p>
+      <p style="font-size:0.75rem;opacity:0.65;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Technical Assessment · April 2026</p>
+      <h1>Naijeria Toweett</h1>
+      <p style="font-size:1rem;margin-top:6px;opacity:0.95;font-weight:600;">Oky Technology Advisory Consultant &nbsp;·&nbsp; UNICEF DCOE</p>
+      <p style="margin-top:12px;opacity:0.88;max-width:580px;line-height:1.65;">10+ years building, deploying, and handing over girl-centred digital platforms across Africa — with direct field experience in Oky's deployment countries and a track record of open-source product stewardship for Digital Public Goods.</p>
       <div class="meta">
-        <span class="tag">@nashthecoder</span>
-        <span class="tag">Branch: for-tests</span>
-        <span class="tag">April 2026</span>
+        <span class="tag">📍 Kilifi, Kenya</span>
+        <span class="tag">Girl Effect — 4 yrs</span>
+        <span class="tag">DPG stewardship</span>
+        <span class="tag">React · Rails · PostgreSQL</span>
+        <span class="tag">github.com/mamatechafrica</span>
+      </div>
+      <div class="cta-row">
+        <a class="btn-primary" href="task1.html">Start with Task 1 →</a>
+        <a class="btn-ghost" href="view.html?file=PROPOSAL.md">Open Source Proposal</a>
+        <a class="btn-ghost" href="view.html?file=SETUP_LOG.md">Setup Log</a>
       </div>
     </div>
 
-    <div class="task-grid">
-      <a class="task-card t1" href="task1.html">
-        <span class="task-num">Task 1</span>
-        <h3>Run app + Lottie animation</h3>
-        <p>Set up the full local stack and swap out an animation in the app.</p>
-        <span class="badge badge-in-progress">In Progress</span>
-      </a>
-      <a class="task-card t2" href="task2.html">
-        <span class="task-num">Task 2</span>
-        <h3>Urban / Rural content targeting</h3>
-        <p>CMS field + app filtering so encyclopedia entries vary by user location type.</p>
-        <span class="badge badge-not-started">Not Started</span>
-      </a>
-      <a class="task-card t3" href="task3.html">
-        <span class="task-num">Task 3 (Optional)</span>
-        <h3>PR review + Security briefing</h3>
-        <p>Short video responding to a code review and a security scenario.</p>
-        <span class="badge badge-not-started">Not Started</span>
-      </a>
+    <!-- Experience → Deliverables -->
+    <div class="card">
+      <h2>🗺️ Experience mapped to ToR deliverables</h2>
+      <p style="font-size:0.88rem;color:#666;line-height:1.6;margin-bottom:4px;">Each role below maps directly to the deliverables it addresses — the same framing used in the cover letter, shown visually here for quick reference.</p>
+      <div class="del-grid">
+        <div class="del-card green">
+          <div class="del-exp">Girl Effect — Global Technical Manager</div>
+          <div class="del-desc">4-country platform delivery across Kenya, Tanzania, Ethiopia, South Africa. Vendor QA, SLA management, documentation, capacity building for non-technical country teams.</div>
+          <div class="del-tags">
+            <span class="del-tag green">D1 Stewardship</span>
+            <span class="del-tag green">D2 Vendor QA</span>
+            <span class="del-tag green">D8 SADC</span>
+            <span class="del-tag green">D10 Docs</span>
+          </div>
+        </div>
+        <div class="del-card blue">
+          <div class="del-exp">AskRafikey — Full Stack SRHR Platform</div>
+          <div class="del-desc">Safeguarding-conscious architecture, privacy mode, crisis detection, non-technical CMS for coalition staff. Built for low-bandwidth Kenya users.</div>
+          <div class="del-tags">
+            <span class="del-tag">D2 QA</span>
+            <span class="del-tag">D3 Release</span>
+            <span class="del-tag">D5 Kenya</span>
+            <span class="del-tag">D10 Docs</span>
+          </div>
+        </div>
+        <div class="del-card orange">
+          <div class="del-exp">NairobiTalks — MIT Licensed DPG</div>
+          <div class="del-desc">Open-source civic platform built with the World Bank. MIT licensed, designed for handover to non-technical Nairobi County IT staff with full architecture documentation.</div>
+          <div class="del-tags">
+            <span class="del-tag">D1 Stewardship</span>
+            <span class="del-tag">D4 Database</span>
+            <span class="del-tag">D10 Docs</span>
+          </div>
+        </div>
+        <div class="del-card pink">
+          <div class="del-exp">HURIDOCS UWAZI — OS Community</div>
+          <div class="del-desc">Open-source contributor community management for a verified UN Digital Public Good — governance, onboarding, contributor coordination.</div>
+          <div class="del-tags">
+            <span class="del-tag">D1 Stewardship</span>
+            <span class="del-tag">D9 Capacity</span>
+          </div>
+        </div>
+        <div class="del-card green">
+          <div class="del-exp">Based in Kenya &nbsp;·&nbsp; SADC Field Experience</div>
+          <div class="del-desc">Direct on-the-ground presence for Kenya FGM module pilot. Multi-country field experience in Kenya, Tanzania, and South Africa — all active Oky ToR countries.</div>
+          <div class="del-tags">
+            <span class="del-tag green">D5 Kenya</span>
+            <span class="del-tag green">D8 SADC</span>
+          </div>
+        </div>
+        <div class="del-card blue">
+          <div class="del-exp">Girl Effect — TEGA Tech Product Manager</div>
+          <div class="del-desc">Full release cycle management, sprint planning, backlog prioritisation, cross-country rollouts, vendor coordination, and post-launch monitoring across 4 countries.</div>
+          <div class="del-tags">
+            <span class="del-tag">D2 Vendor QA</span>
+            <span class="del-tag">D3 QA</span>
+            <span class="del-tag">D9 Capacity</span>
+          </div>
+        </div>
+      </div>
     </div>
 
+    <!-- Assessment tasks -->
     <div class="card">
-      <h2>🤖 Tooling</h2>
-      <p style="font-size:0.9rem;color:#555;line-height:1.6;margin-bottom:12px;">
-        <a href="https://claude.ai/code" style="color:var(--link);font-weight:600;">Claude Code</a> (Anthropic's CLI) was used throughout this assessment to troubleshoot the local setup, identify and document bugs in the repo, generate the proposal documentation, and build these pages. All setup steps, error messages, and fixes in <a href="SETUP_LOG.md" style="color:var(--link)">SETUP_LOG.md</a> were captured and refined with Claude Code running inside VS Code.
+      <h2>📋 Assessment tasks</h2>
+      <p style="font-size:0.88rem;color:#666;margin-bottom:16px;">Three tasks covering setup, feature development, and code review — completed with Claude Code as a technical partner throughout.</p>
+      <div class="task-grid">
+        <a class="task-card t1 featured" href="task1.html">
+          <span class="task-num">Task 1</span>
+          <h3>Clone, run & swap a Lottie animation</h3>
+          <p>Full local setup of a complex multi-workspace React Native monorepo — with every blocker, fix, bug found, and proposed improvement documented.</p>
+          <span class="badge badge-done">Complete</span>
+        </a>
+        <a class="task-card t2" href="task2.html">
+          <span class="task-num">Task 2</span>
+          <h3>Urban / Rural content targeting</h3>
+          <p>CMS field + app filtering so encyclopedia entries vary by user location type.</p>
+          <span class="badge badge-in-progress">In Progress</span>
+        </a>
+        <a class="task-card t3" href="task3.html">
+          <span class="task-num">Task 3 — Optional</span>
+          <h3>PR review + security briefing</h3>
+          <p>Short video responding to a code review and a security scenario.</p>
+          <span class="badge badge-in-progress">In Progress</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- DPG contributions -->
+    <div class="card">
+      <h2>🌍 DPG & open source contributions — beyond the brief</h2>
+      <p style="font-size:0.88rem;color:#666;margin-bottom:14px;">Five new documents proposed for the Oky repository. No existing files were changed — all are staged as <code>.proposal</code> files for the team to review before applying.</p>
+      <table class="info-table">
+        <thead><tr><th>Document</th><th>What it addresses</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><a href="view.html?file=PROPOSAL.md" style="color:var(--link);font-weight:600;">PROPOSAL.md</a></td>
+            <td>Full DPG & open source alignment overview — issue templates, PR template, Docker & Expo SDK warnings, bin/modules fix</td>
+          </tr>
+          <tr>
+            <td><a href="view.html?file=README.proposal.md" style="color:var(--link);font-weight:600;">README.proposal.md</a></td>
+            <td>DPG-aligned README with SDG 3/5/10 badges, GPL-3.0 licence, and full local setup in one place</td>
+          </tr>
+          <tr>
+            <td><a href="view.html?file=SECURITY.proposal.md" style="color:var(--link);font-weight:600;">SECURITY.proposal.md</a></td>
+            <td>Vulnerability disclosure policy — private reporting channel, supported versions, response SLA</td>
+          </tr>
+          <tr>
+            <td><a href="view.html?file=CONTRIBUTING.proposal.md" style="color:var(--link);font-weight:600;">CONTRIBUTING.proposal.md</a></td>
+            <td>12-step open-source contributor guide — bug reports, translations, code review, PR checklist</td>
+          </tr>
+          <tr>
+            <td><a href="view.html?file=SETUP_LOG.md" style="color:var(--link);font-weight:600;">SETUP_LOG.md</a></td>
+            <td>Full environment setup log — every command, blocker, and resolution, in sequence</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Tooling & approach -->
+    <div class="card">
+      <h2>🤖 Approach & tooling</h2>
+      <p style="font-size:0.9rem;color:#555;line-height:1.7;margin-bottom:12px;">
+        <a href="https://claude.ai/code" style="color:var(--link);font-weight:600;">Claude Code</a> (Anthropic's CLI for AI-assisted development) was used throughout this assessment — for troubleshooting the local stack, identifying and documenting bugs, generating proposal documentation, and building these pages. Every step, error, and fix is captured in <a href="view.html?file=SETUP_LOG.md" style="color:var(--link)">SETUP_LOG.md</a>. This is how the role would be approached in practice: AI-augmented, fully documented, and transferable to the team.
       </p>
       <div class="proposal-strip">
-        <span class="prop-tag">Troubleshooting — Docker, Node, submodules, Expo SDK</span>
+        <span class="prop-tag">Setup troubleshooting — Docker, Node, submodules, Expo SDK</span>
         <span class="prop-tag">Documentation — SETUP_LOG, PROPOSAL, CONTRIBUTING, SECURITY</span>
-        <span class="prop-tag">GitHub Pages — HTML, CSS, video embeds</span>
-        <span class="prop-tag">Bug identification — yarn modules, static imports, workspace names</span>
+        <span class="prop-tag">GitHub Pages — HTML, CSS, video embeds, markdown viewer</span>
+        <span class="prop-tag">Bug identification & proposed fixes</span>
       </div>
     </div>
 
+    <!-- Contact -->
     <div class="card">
-      <h2>📦 Repository & Setup</h2>
+      <h2>📬 Contact</h2>
       <table class="info-table">
         <tbody>
-          <tr><td><strong>Assessment repo</strong></td><td><a href="https://github.com/nashthecoder/oky_assessment">nashthecoder/oky_assessment</a></td></tr>
-          <tr><td><strong>Source repo</strong></td><td><a href="https://github.com/Oky-period-tracker/periodtracker/tree/for-tests">Oky-period-tracker/periodtracker (for-tests)</a></td></tr>
-          <tr><td><strong>Key setup notes</strong></td><td>No-Docker path via Homebrew PostgreSQL 14. Node 20.16.0 via nvm. Expo Go SDK 52 on Android device. Full detail in SETUP_LOG.md.</td></tr>
+          <tr><td><strong>Name</strong></td><td>Naijeria Toweett</td></tr>
+          <tr><td><strong>Location</strong></td><td>Kilifi, Kenya</td></tr>
+          <tr><td><strong>Email</strong></td><td><a href="mailto:naijeria@mamatech.co.ke" style="color:var(--link)">naijeria@mamatech.co.ke</a></td></tr>
+          <tr><td><strong>Phone</strong></td><td>+254 721 787 043</td></tr>
+          <tr><td><strong>GitHub</strong></td><td><a href="https://github.com/mamatechafrica" style="color:var(--link)" target="_blank">github.com/mamatechafrica</a></td></tr>
+          <tr><td><strong>Assessment repo</strong></td><td><a href="https://github.com/nashthecoder/oky_assessment" style="color:var(--link)" target="_blank">nashthecoder/oky_assessment</a></td></tr>
+          <tr><td><strong>Source branch</strong></td><td><a href="https://github.com/Oky-period-tracker/periodtracker/tree/for-tests" style="color:var(--link)" target="_blank">Oky-period-tracker/periodtracker · for-tests</a></td></tr>
         </tbody>
       </table>
     </div>
@@ -81,8 +282,8 @@
   </div>
 
   <footer>
-    <p>Oky Period Tracker is a <a href="https://digitalpublicgoods.net/">Digital Public Good</a> — SDG 3, 5, 10 &nbsp;|&nbsp; <a href="https://www.okyapp.info/">okyapp.info</a></p>
-    <p>@nashthecoder &nbsp;·&nbsp; April 2026</p>
+    <p>Oky Period Tracker is a <a href="https://digitalpublicgoods.net/">Digital Public Good</a> — SDG 3, 5 &amp; 10 &nbsp;|&nbsp; <a href="https://www.okyapp.info/">okyapp.info</a></p>
+    <p>Naijeria Toweett &nbsp;·&nbsp; Kilifi, Kenya &nbsp;·&nbsp; April 2026</p>
   </footer>
 
 </body>
