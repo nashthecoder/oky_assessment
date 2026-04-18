@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oky Assessment — Doc Viewer</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    .md-body { max-width: 860px; margin: 32px auto; padding: 0 20px 60px; }
+    .md-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 36px 40px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .md-card h1 { font-size: 1.6rem; color: var(--danger); margin-bottom: 8px; }
+    .md-card h2 { font-size: 1.2rem; color: var(--primary-dark); margin: 28px 0 10px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+    .md-card h3 { font-size: 1rem; color: #333; margin: 20px 0 8px; }
+    .md-card p  { font-size: 0.92rem; line-height: 1.7; color: #444; margin-bottom: 12px; }
+    .md-card ul, .md-card ol { padding-left: 20px; margin-bottom: 12px; }
+    .md-card li { font-size: 0.92rem; line-height: 1.7; color: #444; margin-bottom: 4px; }
+    .md-card a  { color: var(--link); }
+    .md-card code {
+      background: #f1f1f1;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85em;
+      font-family: 'SF Mono', 'Fira Mono', monospace;
+    }
+    .md-card pre {
+      background: #1B1B1F;
+      color: #e2e2e2;
+      border-radius: 10px;
+      padding: 16px 20px;
+      overflow-x: auto;
+      margin: 12px 0;
+    }
+    .md-card pre code {
+      background: none;
+      padding: 0;
+      font-size: 0.82rem;
+      line-height: 1.7;
+      color: inherit;
+    }
+    .md-card table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.9rem; }
+    .md-card th { background: var(--nav); padding: 10px 12px; text-align: left; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--primary-dark); border-bottom: 2px solid var(--border); }
+    .md-card td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    .md-card blockquote { border-left: 4px solid var(--danger-light); padding: 10px 16px; margin: 12px 0; color: #666; font-style: italic; background: #fff5f9; border-radius: 0 8px 8px 0; }
+    .md-card hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+    #loading { text-align: center; padding: 60px; color: #aaa; font-size: 0.9rem; }
+    #error   { text-align: center; padding: 60px; color: var(--danger); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <a class="brand" href="index.html">
+      <div class="logo">🌸</div>
+      <span>Oky Assessment</span>
+    </a>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="task1.html">Task 1</a>
+      <a href="task2.html">Task 2</a>
+      <a href="task3.html">Task 3</a>
+    </nav>
+  </div>
+
+  <div class="md-body">
+    <div id="loading">Loading document…</div>
+    <div id="error" style="display:none"></div>
+    <div class="md-card" id="content" style="display:none"></div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search)
+    const file   = params.get('file')
+
+    if (!file) {
+      document.getElementById('loading').style.display = 'none'
+      document.getElementById('error').style.display = 'block'
+      document.getElementById('error').textContent = 'No file specified. Add ?file=FILENAME.md to the URL.'
+    } else {
+      document.title = file + ' — Oky Assessment'
+      fetch(file)
+        .then(r => {
+          if (!r.ok) throw new Error('File not found: ' + file)
+          return r.text()
+        })
+        .then(md => {
+          document.getElementById('loading').style.display = 'none'
+          const el = document.getElementById('content')
+          el.style.display = 'block'
+          el.innerHTML = marked.parse(md)
+        })
+        .catch(err => {
+          document.getElementById('loading').style.display = 'none'
+          document.getElementById('error').style.display = 'block'
+          document.getElementById('error').textContent = err.message
+        })
+    }
+  </script>
+
+</body>
+</html>
