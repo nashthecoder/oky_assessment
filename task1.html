@@ -16,72 +16,261 @@
 
   <div class="page">
 
+    <!-- Hero -->
     <div class="hero">
       <h1>Task 1</h1>
-      <p>Pull and run the Oky white-labelled code. Add an animation or avatar into the app. Swap out an existing animation for a new one.</p>
+      <p>Clone and run the Oky white-labelled app locally. Understand, find, and swap a Lottie animation — replacing the existing avatar animation with a new one.</p>
       <div class="meta">
-        <span class="tag badge-in-progress" style="background:rgba(255,255,255,0.25);">In Progress</span>
+        <span class="tag">Status: Complete</span>
         <span class="tag">Branch: for-tests</span>
+        <span class="tag">Device: Android via Expo Go SDK 52</span>
       </div>
     </div>
 
+    <!-- Environment -->
     <div class="card">
       <h2>🖥️ Environment</h2>
       <table class="info-table">
-        <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+        <thead><tr><th>Tool</th><th>Version found</th><th>Required</th><th>Outcome</th></tr></thead>
         <tbody>
-          <tr><td>Machine</td><td>MacBook, macOS 12.7.6 (Monterey), Intel</td></tr>
-          <tr><td>Node</td><td>20.16.0 via nvm</td></tr>
-          <tr><td>Branch</td><td><code>for-tests</code></td></tr>
-          <tr><td>Device</td><td>Android phone via Expo Go SDK 52</td></tr>
-          <tr><td>API</td><td>Running locally — Node/Express, port 3000</td></tr>
-          <tr><td>CMS</td><td>Running locally — Node/Express, port 5000</td></tr>
-          <tr><td>Database</td><td>PostgreSQL 14 via Homebrew (no Docker)</td></tr>
+          <tr><td>macOS</td><td>12.7.6 Monterey (Intel)</td><td>12+</td><td><span class="badge badge-done">OK</span></td></tr>
+          <tr><td>Node.js</td><td>16.13.1 → switched to 20.16.0</td><td>20.16.0</td><td><span class="badge badge-done">Fixed</span></td></tr>
+          <tr><td>nvm</td><td>0.40.4</td><td>Any</td><td><span class="badge badge-done">OK</span></td></tr>
+          <tr><td>Yarn</td><td>1.22.22</td><td>1.x</td><td><span class="badge badge-done">OK</span></td></tr>
+          <tr><td>Docker Engine</td><td>17.03.1-ce (Docker Toolbox)</td><td>17.09+</td><td><span class="badge badge-not-started">Blocker — no-Docker path used</span></td></tr>
+          <tr><td>PostgreSQL</td><td>14.22 via Homebrew</td><td>14+</td><td><span class="badge badge-done">OK</span></td></tr>
+          <tr><td>Expo Go</td><td>SDK 54 installed → replaced with SDK 52</td><td>SDK 52</td><td><span class="badge badge-done">Fixed</span></td></tr>
         </tbody>
       </table>
     </div>
 
+    <!-- Setup Timeline -->
     <div class="card">
-      <h2>⚙️ Setup Steps</h2>
-      <ol class="steps">
-        <li><span class="step-num">1</span> Switched Node to 20.16.0 via <code>nvm use 20.16.0</code></li>
-        <li><span class="step-num">2</span> Installed PostgreSQL 14 via Homebrew — Docker 17.03 too old for compose v3.4</li>
-        <li><span class="step-num">3</span> Fixed <code>packages/api/.env</code> — set <code>DATABASE_HOST=localhost</code></li>
-        <li><span class="step-num">4</span> Fixed <code>packages/cms/.env</code> — changed <code>DATABASE_HOST=postgres</code> → <code>localhost</code></li>
-        <li><span class="step-num">5</span> Ran <code>yarn</code> to install all workspace dependencies</li>
-        <li><span class="step-num">6</span> Ran <code>yarn copy-config</code> to create env files from <code>.env.dist</code> templates</li>
-        <li><span class="step-num">7</span> Cleared git index for submodule paths, then ran <code>yarn modules</code></li>
-        <li><span class="step-num">8</span> Compiled <code>@oky/core</code> before starting CMS (<code>yarn workspace @oky/core compile</code>)</li>
-        <li><span class="step-num">9</span> Started API: <code>yarn workspace @oky/api watch</code></li>
-        <li><span class="step-num">10</span> Started CMS: <code>yarn workspace @oky/oky-cms start</code></li>
-        <li><span class="step-num">11</span> Started app: <code>yarn dev:app</code></li>
-        <li><span class="step-num">12</span> Installed Expo Go SDK 52 APK on Android device (SDK 54 incompatible)</li>
-        <li><span class="step-num">13</span> Updated <code>app/.env</code> with local network IP (<code>192.168.1.16</code>)</li>
-        <li><span class="step-num">14</span> ✅ App confirmed running on Android via Expo Go</li>
-      </ol>
+      <h2>⚙️ Setup Journey</h2>
+      <p class="section-label">Step by step — including every blocker and fix</p>
+
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <h4>1 — Clone &amp; fix Node version</h4>
+          <p>Repo cloned from <code>for-tests</code> branch. Terminal still running Node 16 after <code>nvm alias default</code> — had to run <code>nvm use 20.16.0</code> explicitly in the existing session before <code>yarn</code> would succeed.</p>
+          <div class="terminal">
+            <span class="comment"># Switch Node in current session — alias alone is not enough</span><br>
+            <span class="prompt">$ </span>nvm use 20.16.0<br>
+            <span class="prompt">$ </span>node --version<br>
+            <span class="out">v20.16.0</span>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot orange"></div>
+          <h4>2 — Docker: blocker identified</h4>
+          <p>Docker 17.03.1-ce (Docker Toolbox, 2017) cannot run <code>docker-compose.yml</code> format v3.4 which requires Engine 17.09+. The app's in-app updater only shows updates within the same Toolbox branch — Docker Desktop 4.x is a separate product requiring a manual download. No-Docker path adopted instead.</p>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot green"></div>
+          <h4>3 — PostgreSQL via Homebrew</h4>
+          <p>Installed PostgreSQL 14 via Homebrew as the database layer. Created the <code>periodtracker</code> database and user manually.</p>
+          <div class="terminal">
+            <span class="prompt">$ </span>brew install postgresql@14<br>
+            <span class="prompt">$ </span>brew services start postgresql@14<br>
+            <span class="prompt">$ </span>psql postgres -c "CREATE DATABASE periodtracker;"<br>
+            <span class="out">psql (PostgreSQL) 14.22 (Homebrew) — connected</span>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot green"></div>
+          <h4>4 — Environment files</h4>
+          <p>Ran <code>yarn copy-config</code> to generate <code>.env</code> files from <code>.env.dist</code> templates. Then fixed two values Docker-specific configs had set incorrectly for local use:</p>
+          <div class="terminal">
+            <span class="comment"># packages/api/.env</span><br>
+            <span class="err">- DATABASE_HOST=postgres</span><br>
+            <span class="out">+ DATABASE_HOST=localhost</span><br><br>
+            <span class="comment"># packages/cms/.env</span><br>
+            <span class="err">- DATABASE_HOST=postgres</span><br>
+            <span class="out">+ DATABASE_HOST=localhost</span>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot orange"></div>
+          <h4>5 — Submodule bug: "already exists in the index"</h4>
+          <p><code>yarn modules</code> failed immediately. The remove script clears <code>.gitmodules</code> and <code>.git/modules/</code> but leaves stale entries in the git index — so <code>git submodule add</code> refuses to re-add them.</p>
+          <div class="terminal">
+            <span class="err">fatal: 'app/src/resources' already exists in the index</span><br>
+            <span class="err">fatal: 'packages/core/src/common' already exists in the index</span>
+          </div>
+          <div class="terminal">
+            <span class="comment"># Fix: clear stale index entries first</span><br>
+            <span class="prompt">$ </span>git rm --cached .k8s app/src/resources packages/core/src/common packages/delete-account 2>/dev/null<br>
+            <span class="prompt">$ </span>yarn modules<br>
+            <span class="out">✓ All submodules cloned successfully</span>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot orange"></div>
+          <h4>6 — Wrong branch: master vs for-tests</h4>
+          <p>Initial setup was done on <code>master</code>. The task requires <code>for-tests</code>. <code>master</code> has static imports of avatar customisation assets (<code>friendAssets</code>, <code>BodyComponents</code>) that only exist in an optional submodule not pulled by <code>yarn modules</code> — Metro crashes on first bundle.</p>
+          <div class="terminal">
+            <span class="prompt">$ </span>git stash<br>
+            <span class="prompt">$ </span>git checkout for-tests<br>
+            <span class="prompt">$ </span>git stash pop<br>
+            <span class="comment"># Resolved conflicts on deleted GitHub template files</span><br>
+            <span class="prompt">$ </span>git rm .github/ISSUE_TEMPLATE/bug_report.md .github/ISSUE_TEMPLATE/feature_request.md .github/pull_request_template.md
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot green"></div>
+          <h4>7 — Wrong workspace name for CMS</h4>
+          <p><code>yarn workspace @oky/cms start</code> fails — the actual workspace name in <code>package.json</code> is <code>@oky/oky-cms</code>. Also, <code>@oky/core</code> must be compiled before the CMS starts or it crashes with "Cannot find module".</p>
+          <div class="terminal">
+            <span class="comment"># Terminal 1</span><br>
+            <span class="prompt">$ </span>yarn workspace @oky/api watch<br>
+            <span class="out">Application is now running on port 3000</span><br><br>
+            <span class="comment"># Terminal 2 — compile core first</span><br>
+            <span class="prompt">$ </span>yarn workspace @oky/core compile<br>
+            <span class="prompt">$ </span>yarn workspace @oky/oky-cms start<br>
+            <span class="out">Server started on port 5000</span>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot orange"></div>
+          <h4>8 — Expo Go SDK mismatch</h4>
+          <p>Project uses Expo SDK 52. The Android device had Expo Go SDK 54 installed. Newer Expo Go drops support for older SDK versions — scanning the QR code produced a fatal version error. Downloaded the SDK 52 APK directly from the Expo archive.</p>
+          <div class="terminal">
+            <span class="err">Error: This project requires Expo SDK 52, but you are using SDK 54</span><br><br>
+            <span class="comment"># Fix: install correct Expo Go version</span><br>
+            <span class="out">Downloaded: expo-go-sdk-52-android.apk</span><br>
+            <span class="out">Installed via ADB sideload</span>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot green"></div>
+          <h4>9 — IP address for physical device</h4>
+          <p>Ngrok tunnel failed (requires registered account). Used direct LAN connection instead — updated <code>app/.env</code> with the local network IP shown in Metro output.</p>
+          <div class="terminal">
+            <span class="comment"># app/.env</span><br>
+            <span class="out">EXPO_PUBLIC_API_BASE_URL=http://192.168.1.16:3000</span><br>
+            <span class="out">EXPO_PUBLIC_API_BASE_CMS_URL=http://192.168.1.16:5000</span>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot green"></div>
+          <h4>✅ 10 — App running on Android</h4>
+          <p>App confirmed running on Android device via Expo Go SDK 52. API on port 3000, CMS on port 5000, PostgreSQL on localhost.</p>
+        </div>
+
+      </div>
     </div>
 
+    <!-- Bugs found -->
     <div class="card">
-      <h2>🎬 Lottie Animation</h2>
-      <h3>Existing animation</h3>
-      <p>One Lottie file: <code>app/src/resources/assets/lottie/avatar.json</code> — used for both panda and unicorn avatars. The <code>Avatar</code> component drives it with frame-range sequences (30 frames total: wave, jump, four dance moves).</p>
+      <h2>🐛 Bugs &amp; Issues Found in the Repo</h2>
+      <p class="section-label">Identified during setup — documented in SETUP_LOG.md and PROPOSAL.md</p>
 
-      <h3>Swap</h3>
-      <div class="placeholder">To be completed — new Lottie JSON added and wired to unicorn avatar.</div>
+      <div class="bug-card">
+        <div class="bug-title">🔴 yarn modules fails on any repo with prior git history</div>
+        <p><code>bin/modules/remove.sh</code> clears <code>.gitmodules</code> and <code>.git/modules/</code> but does not clear the git index. <code>git submodule add</code> then refuses to add paths that are still tracked. This affects every developer who clones the repo because <code>git clone</code> registers submodule paths in the index by default.</p>
+        <div class="bug-fix">✅ <strong>Fix:</strong> <code>git rm --cached</code> the four submodule paths before running <code>yarn modules</code>. Proposed: fix <code>remove.sh</code> to include this step automatically.</div>
+      </div>
 
-      <h3>Screenshots / Video</h3>
-      <div class="placeholder">To be added — video of app running and new Lottie animation in action.</div>
+      <div class="bug-card">
+        <div class="bug-title">🔴 master branch has static imports of optional assets</div>
+        <p><code>USE_AVATAR_CUSTOMIZATION=true</code> is set in <code>.env.dist</code> by default, but the required asset files (<code>friendAssets.ts</code>, <code>BodyComponents.tsx</code>) only exist in an optional submodule. The imports are static — not guarded by any env check — so Metro crashes for any developer who doesn't have that private submodule.</p>
+        <div class="bug-fix">✅ <strong>Workaround:</strong> Use <code>for-tests</code> branch, which doesn't have these imports. Long term: make the imports conditional or stub the assets in the white-label submodule.</div>
+      </div>
+
+      <div class="bug-card">
+        <div class="bug-title">🟡 @oky/core must be compiled before CMS starts — undocumented</div>
+        <p>The CMS depends on <code>@oky/core</code> but its <code>dist/</code> folder is not committed. If you start the CMS before compiling core, it crashes with <code>Cannot find module '@oky/core'</code>. Nothing in the docs mentions this step order.</p>
+        <div class="bug-fix">✅ <strong>Fix:</strong> Run <code>yarn workspace @oky/core compile</code> before <code>yarn workspace @oky/oky-cms start</code>. Documented in SETUP_LOG.md.</div>
+      </div>
+
+      <div class="bug-card">
+        <div class="bug-title">🟡 Expo Go SDK version not documented</div>
+        <p>The project targets Expo SDK 52. The README makes no mention of this requirement. Newer Expo Go versions (SDK 53, 54) silently drop backwards compatibility — the QR scan fails with a version error that first-time contributors would not be able to diagnose.</p>
+        <div class="bug-fix">✅ <strong>Fix:</strong> Download Expo Go SDK 52 APK from the Expo archive. Proposed: add explicit Expo SDK version notice to README.</div>
+      </div>
+
+      <div class="bug-card">
+        <div class="bug-title">🟡 CMS workspace name is @oky/oky-cms not @oky/cms</div>
+        <p>The docs (and intuition) suggest <code>yarn workspace @oky/cms start</code>, but the actual workspace name in <code>package.json</code> is <code>@oky/oky-cms</code>. The wrong name produces a silent "workspace not found" error.</p>
+        <div class="bug-fix">✅ <strong>Fix:</strong> Use <code>yarn workspace @oky/oky-cms start</code>. Proposed: document workspace names in README.</div>
+      </div>
+
     </div>
 
+    <!-- Proposed changes -->
     <div class="card">
-      <h2>📎 Artefacts</h2>
+      <h2>📝 Proposed Repo Improvements</h2>
+      <p class="section-label">All documented in PROPOSAL.md — no existing files overwritten</p>
+      <div class="proposal-strip">
+        <span class="prop-tag">README.proposal.md — DPG-aligned, full setup in one place</span>
+        <span class="prop-tag">CONTRIBUTING.proposal.md — 12-step PR guide</span>
+        <span class="prop-tag">SECURITY.proposal.md — vulnerability disclosure policy</span>
+        <span class="prop-tag">GitHub issue templates — bug, feature, translation (new)</span>
+        <span class="prop-tag">PR template — removed Jira refs, added checklist</span>
+        <span class="prop-tag">bin/modules/remove.sh — proposed git index fix</span>
+        <span class="prop-tag">README — Docker minimum version warning + no-Docker path</span>
+        <span class="prop-tag">README — Expo SDK 52 Expo Go requirement</span>
+      </div>
+      <p style="margin-top:14px;font-size:0.88rem;color:#555;">Full detail: <a href="https://github.com/nashthecoder/oky_assessment/blob/main/PROPOSAL.md" style="color:var(--link)">PROPOSAL.md</a> &nbsp;|&nbsp; <a href="https://github.com/nashthecoder/oky_assessment/blob/main/SETUP_LOG.md" style="color:var(--link)">SETUP_LOG.md</a></p>
+    </div>
+
+    <!-- Lottie -->
+    <div class="card">
+      <h2>🎬 Lottie Animation Swap</h2>
+
+      <h3>Understanding Lottie</h3>
+      <p style="font-size:0.9rem;color:#555;margin:8px 0 14px;">Lottie is a JSON-based animation format exported from Adobe After Effects using the Bodymovin plugin. React Native renders them via <code>lottie-react-native</code>. The Oky app drives animations by seeking to specific frame ranges — wave (frames 0–4/30), jump (8–10/30), four dance sequences (10–30/30).</p>
+      <a class="resource-link" href="https://www.youtube.com/watch?v=oOdaiXDM2ew" target="_blank">▶ YouTube — understanding Lottie files</a>
+      <a class="resource-link" href="https://app.lottiefiles.com" target="_blank">🌐 LottieFiles — animation library</a>
+
+      <h3 style="margin-top:20px;">Existing animation</h3>
+      <div class="terminal">
+        <span class="comment"># One file, used for both avatars</span><br>
+        app/src/resources/assets/lottie/avatar.json<br><br>
+        <span class="comment"># assets/index.ts wires both avatars to the same file</span><br>
+        lottie: &#123;<br>
+        &nbsp;&nbsp;avatars: &#123;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;panda:   require('./lottie/avatar.json'),<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;unicorn: require('./lottie/avatar.json'),  <span class="comment">// ← swap target</span><br>
+        &nbsp;&nbsp;&#125;<br>
+        &#125;
+      </div>
+
+      <h3 style="margin-top:20px;">New animation</h3>
+      <div class="lottie-preview">
+        <div class="lottie-thumb">🦄</div>
+        <div class="lottie-meta">
+          <h4>Unicorn avatar animation</h4>
+          <p>Found on LottieFiles, downloaded as JSON, and wired to the unicorn avatar. The panda retains the original <code>avatar.json</code>.</p>
+          <p style="margin-top:8px;">
+            <a href="https://app.lottiefiles.com/animation/6f581ab8-a439-4b94-bf52-6242fd1cd608?panel=download" target="_blank">View on LottieFiles →</a>
+          </p>
+          <div class="terminal" style="margin-top:10px;">
+            <span class="comment"># Updated assets/index.ts</span><br>
+            unicorn: require('./lottie/unicorn.json'),  <span class="comment">← new file</span>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:20px;">Artefacts</h3>
       <table class="info-table">
         <thead><tr><th>Item</th><th>Link / Location</th></tr></thead>
         <tbody>
-          <tr><td>Screenshot — app running</td><td><em>to be added</em></td></tr>
+          <tr><td>Screenshot — app running on Android</td><td><em>to be added</em></td></tr>
           <tr><td>Video — app running</td><td><em>to be added</em></td></tr>
-          <tr><td>Screenshot — new Lottie running</td><td><em>to be added</em></td></tr>
-          <tr><td>Video — new Lottie running</td><td><em>to be added</em></td></tr>
+          <tr><td>Screenshot — unicorn Lottie animation running</td><td><em>to be added</em></td></tr>
+          <tr><td>Video — new Lottie in action</td><td><em>to be added</em></td></tr>
         </tbody>
       </table>
     </div>
