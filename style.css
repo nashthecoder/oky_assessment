@@ -86,6 +86,25 @@ body {
 .navbar nav a.active {
   color: var(--white);
   border-bottom-color: var(--white);
+  background: rgba(255,255,255,0.15);
+}
+
+/* ── Per-page navbar accent colour ── */
+body.page-task1 .navbar { background: linear-gradient(90deg, var(--danger) 0%, #c84b7a 100%); }
+body.page-task2 .navbar { background: linear-gradient(90deg, var(--tertiary) 0%, #1169BF 100%); }
+body.page-task3 .navbar { background: linear-gradient(90deg, var(--secondary) 0%, #BD6600 100%); }
+
+/* ── Mobile nav ── */
+@media (max-width: 600px) {
+  .navbar { flex-wrap: wrap; padding: 0 14px; }
+  .navbar .brand { padding: 10px 0; }
+  .navbar nav { width: 100%; border-top: 1px solid rgba(255,255,255,0.15); }
+  .navbar nav a { padding: 0 12px; font-size: 0.82rem; height: 42px; }
+  .page { margin: 20px auto; }
+  .card { padding: 20px 18px; }
+  .hero { padding: 24px 20px; }
+  .hero h1 { font-size: 1.3rem; }
+  .task-grid { grid-template-columns: 1fr; }
 }
 
 /* ── Page wrap ── */
