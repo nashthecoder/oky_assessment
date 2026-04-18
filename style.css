@@ -25,39 +25,68 @@ body {
   min-height: 100vh;
 }
 
-/* ── Top bar ── */
-.topbar {
+/* ── Nav bar ── */
+.navbar {
   background: var(--danger);
-  padding: 14px 24px;
+  padding: 0 24px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0;
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
-.topbar .logo {
-  width: 36px;
-  height: 36px;
+.navbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  text-decoration: none;
+  color: var(--white);
+  flex-shrink: 0;
+}
+.navbar .brand .logo {
+  width: 34px;
+  height: 34px;
   background: var(--white);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 18px;
 }
-.topbar h1 {
-  color: var(--white);
-  font-size: 1.1rem;
+.navbar .brand span {
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.02em;
 }
-.topbar .back {
+.navbar nav {
+  display: flex;
+  align-items: stretch;
   margin-left: auto;
-  color: var(--white);
-  text-decoration: none;
-  font-size: 0.9rem;
-  opacity: 0.9;
+  gap: 0;
 }
-.topbar .back:hover { opacity: 1; text-decoration: underline; }
+.navbar nav a {
+  color: rgba(255,255,255,0.82);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  border-bottom: 3px solid transparent;
+  height: 58px;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.navbar nav a:hover {
+  color: var(--white);
+  background: rgba(255,255,255,0.1);
+}
+.navbar nav a.active {
+  color: var(--white);
+  border-bottom-color: var(--white);
+}
 
 /* ── Page wrap ── */
 .page {
@@ -341,9 +370,15 @@ code {
 
 /* ── Footer ── */
 footer {
+  background: var(--white);
+  border-top: 1px solid var(--border);
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: #aaa;
-  margin-top: 40px;
+  padding: 22px 24px;
+  margin-top: 60px;
 }
+footer p { margin-bottom: 6px; }
+footer p:last-child { margin-bottom: 0; }
 footer a { color: var(--link); text-decoration: none; }
+footer a:hover { text-decoration: underline; }

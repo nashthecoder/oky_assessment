@@ -5,13 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Task 1 — Oky Assessment</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
 <body>
 
-  <div class="topbar">
-    <div class="logo">🌸</div>
-    <h1>Task 1 — Run App + Lottie Animation</h1>
-    <a class="back" href="index.html">← Overview</a>
+  <div class="navbar">
+    <a class="brand" href="index.html">
+      <div class="logo">🌸</div>
+      <span>Oky Assessment</span>
+    </a>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="task1.html" class="active">Task 1</a>
+      <a href="task2.html">Task 2</a>
+      <a href="task3.html">Task 3</a>
+    </nav>
   </div>
 
   <div class="page">
@@ -247,9 +255,21 @@
         &#125;
       </div>
 
+      <div class="lottie-preview" style="margin-top:16px;">
+        <div style="text-align:center;">
+          <p style="font-size:0.82rem;color:#888;margin-bottom:6px;">avatar.json — original (panda)</p>
+          <lottie-player src="avatar.json" background="transparent" speed="1" style="width:180px;height:180px;margin:0 auto;" loop autoplay></lottie-player>
+          <a href="avatar.json" download style="display:inline-block;margin-top:6px;font-size:0.8rem;color:var(--link);">⬇ Download avatar.json</a>
+        </div>
+      </div>
+
       <h3 style="margin-top:20px;">New animation</h3>
       <div class="lottie-preview">
-        <div class="lottie-thumb">🦄</div>
+        <div style="text-align:center;">
+          <p style="font-size:0.82rem;color:#888;margin-bottom:6px;">Avatar 1.json — replacement (unicorn)</p>
+          <lottie-player src="Avatar1.json" background="transparent" speed="1" style="width:180px;height:180px;margin:0 auto;" loop autoplay></lottie-player>
+          <a href="Avatar1.json" download style="display:inline-block;margin-top:6px;font-size:0.8rem;color:var(--link);">⬇ Download Avatar1.json</a>
+        </div>
         <div class="lottie-meta">
           <h4>Unicorn avatar animation</h4>
           <p>Found on LottieFiles, downloaded as JSON, and wired to the unicorn avatar. The panda retains the original <code>avatar.json</code>.</p>

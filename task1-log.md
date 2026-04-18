@@ -44,15 +44,16 @@ Full setup detail is in [SETUP_LOG.md](../SETUP_LOG.md). Summary of what was req
 
 ### Finding existing animations
 
-_To be completed_
+Located existing Lottie animation at `app/src/resources/assets/lottie/avatar.json`.
 
 ### Swap process
 
-_To be completed_
+1. Sourced replacement animation — saved as `tasks/Avatar1.json`
+2. Swapped `avatar.json` in `app/src/resources/assets/lottie/` with the new animation from `Avatar1.json`
 
 ### New animation added
 
-_To be completed_
+`Avatar1.json` — swapped in place of the original `avatar.json` Lottie file.
 
 ---
 
