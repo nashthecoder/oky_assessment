@@ -187,31 +187,46 @@
       <div class="bug-card">
         <div class="bug-title">🔴 yarn modules fails on any repo with prior git history</div>
         <p><code>bin/modules/remove.sh</code> clears <code>.gitmodules</code> and <code>.git/modules/</code> but does not clear the git index. <code>git submodule add</code> then refuses to add paths that are still tracked. This affects every developer who clones the repo because <code>git clone</code> registers submodule paths in the index by default.</p>
-        <div class="bug-fix">✅ <strong>Fix:</strong> <code>git rm --cached</code> the four submodule paths before running <code>yarn modules</code>. Proposed: fix <code>remove.sh</code> to include this step automatically.</div>
+        <div class="bug-actions">
+          <div class="bug-fix">✅ <strong>Fix applied:</strong> <code>git rm --cached</code> the four submodule paths before running <code>yarn modules</code>.</div>
+          <div class="bug-propose">💡 <strong>Proposed:</strong> Fix <code>remove.sh</code> to include this <code>git rm --cached</code> step automatically so no developer hits this again.</div>
+        </div>
       </div>
 
       <div class="bug-card">
         <div class="bug-title">🔴 master branch has static imports of optional assets</div>
         <p><code>USE_AVATAR_CUSTOMIZATION=true</code> is set in <code>.env.dist</code> by default, but the required asset files (<code>friendAssets.ts</code>, <code>BodyComponents.tsx</code>) only exist in an optional submodule. The imports are static — not guarded by any env check — so Metro crashes for any developer who doesn't have that private submodule.</p>
-        <div class="bug-fix">✅ <strong>Workaround:</strong> Use <code>for-tests</code> branch, which doesn't have these imports. Long term: make the imports conditional or stub the assets in the white-label submodule.</div>
+        <div class="bug-actions">
+          <div class="bug-fix">✅ <strong>Workaround applied:</strong> Switch to <code>for-tests</code> branch, which doesn't have these static imports.</div>
+          <div class="bug-propose">💡 <strong>Proposed:</strong> Make the imports conditional on the env flag, or stub the missing assets in the white-label submodule so the app bundles without the optional module.</div>
+        </div>
       </div>
 
       <div class="bug-card">
         <div class="bug-title">🟡 @oky/core must be compiled before CMS starts — undocumented</div>
         <p>The CMS depends on <code>@oky/core</code> but its <code>dist/</code> folder is not committed. If you start the CMS before compiling core, it crashes with <code>Cannot find module '@oky/core'</code>. Nothing in the docs mentions this step order.</p>
-        <div class="bug-fix">✅ <strong>Fix:</strong> Run <code>yarn workspace @oky/core compile</code> before <code>yarn workspace @oky/oky-cms start</code>. Documented in SETUP_LOG.md.</div>
+        <div class="bug-actions">
+          <div class="bug-fix">✅ <strong>Fix applied:</strong> Run <code>yarn workspace @oky/core compile</code> before <code>yarn workspace @oky/oky-cms start</code>. Documented in SETUP_LOG.md.</div>
+          <div class="bug-propose">💡 <strong>Proposed:</strong> Add a <code>prestart</code> script to the CMS workspace that auto-compiles core, or document the step order explicitly in the README.</div>
+        </div>
       </div>
 
       <div class="bug-card">
         <div class="bug-title">🟡 Expo Go SDK version not documented</div>
         <p>The project targets Expo SDK 52. The README makes no mention of this requirement. Newer Expo Go versions (SDK 53, 54) silently drop backwards compatibility — the QR scan fails with a version error that first-time contributors would not be able to diagnose.</p>
-        <div class="bug-fix">✅ <strong>Fix:</strong> Download Expo Go SDK 52 APK from the Expo archive. Proposed: add explicit Expo SDK version notice to README.</div>
+        <div class="bug-actions">
+          <div class="bug-fix">✅ <strong>Fix applied:</strong> Downloaded Expo Go SDK 52 APK directly from the Expo archive and sideloaded onto Android device.</div>
+          <div class="bug-propose">💡 <strong>Proposed:</strong> Add an explicit Expo SDK version warning to the README with a direct link to the SDK 52 Expo Go download.</div>
+        </div>
       </div>
 
       <div class="bug-card">
         <div class="bug-title">🟡 CMS workspace name is @oky/oky-cms not @oky/cms</div>
         <p>The docs (and intuition) suggest <code>yarn workspace @oky/cms start</code>, but the actual workspace name in <code>package.json</code> is <code>@oky/oky-cms</code>. The wrong name produces a silent "workspace not found" error.</p>
-        <div class="bug-fix">✅ <strong>Fix:</strong> Use <code>yarn workspace @oky/oky-cms start</code>. Proposed: document workspace names in README.</div>
+        <div class="bug-actions">
+          <div class="bug-fix">✅ <strong>Fix applied:</strong> Use <code>yarn workspace @oky/oky-cms start</code>. Correct name confirmed from <code>package.json</code>.</div>
+          <div class="bug-propose">💡 <strong>Proposed:</strong> Document all workspace names and their start commands in the README setup section.</div>
+        </div>
       </div>
 
     </div>

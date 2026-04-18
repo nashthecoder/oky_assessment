@@ -318,7 +318,29 @@ code {
   margin-bottom: 14px;
 }
 .bug-card .bug-title { font-weight: 700; font-size: 0.9rem; color: var(--danger); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
-.bug-card .bug-fix { margin-top: 8px; font-size: 0.85rem; color: var(--primary-dark); display: flex; align-items: flex-start; gap: 6px; }
+.bug-actions { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.bug-fix {
+  font-size: 0.85rem;
+  color: var(--primary-dark);
+  background: #f0f9e8;
+  border-left: 3px solid var(--primary);
+  border-radius: 0 6px 6px 0;
+  padding: 8px 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+.bug-propose {
+  font-size: 0.85rem;
+  color: #6b4c00;
+  background: #fff8e6;
+  border-left: 3px solid var(--star);
+  border-radius: 0 6px 6px 0;
+  padding: 8px 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
 .bug-card p { font-size: 0.86rem; color: #555; line-height: 1.5; }
 
 /* ── Proposal strip ── */
