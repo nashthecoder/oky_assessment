@@ -89,7 +89,7 @@ body {
   background: rgba(255,255,255,0.15);
 }
 
-/* ── Per-page navbar accent colour ── */
+/* ── Per-page navbar accent color ── */
 body.page-task1 .navbar { background: linear-gradient(90deg, var(--danger) 0%, #c84b7a 100%); }
 body.page-task2 .navbar { background: linear-gradient(90deg, var(--tertiary) 0%, #1169BF 100%); }
 body.page-task3 .navbar { background: linear-gradient(90deg, var(--secondary) 0%, #BD6600 100%); }

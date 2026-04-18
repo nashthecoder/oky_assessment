@@ -1,0 +1,15 @@
+blank_issues_enabled: false
+
+contact_links:
+  - name: Ask a question / get help
+    url: https://github.com/Oky-period-tracker/periodtracker/discussions
+    about: Use GitHub Discussions for questions, ideas, and general conversation.
+  - name: Partnership or deployment enquiry
+    url: mailto:hello@okyapp.info
+    about: Want to deploy Oky in your country or organisation? Email the Oky team.
+  - name: Code of Conduct violation
+    url: mailto:okyperiodtracker@gmail.com
+    about: Report a Code of Conduct concern privately to the maintainers.
+  - name: Translation help
+    url: https://github.com/Oky-period-tracker/periodtracker/blob/master/docs/localisation/translations.md
+    about: Read the translation guide before opening a translation issue.
