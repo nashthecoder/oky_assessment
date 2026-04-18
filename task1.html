@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 1 — Oky Assessment</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="logo">🌸</div>
+    <h1>Task 1 — Run App + Lottie Animation</h1>
+    <a class="back" href="index.html">← Overview</a>
+  </div>
+
+  <div class="page">
+
+    <div class="hero">
+      <h1>Task 1</h1>
+      <p>Pull and run the Oky white-labelled code. Add an animation or avatar into the app. Swap out an existing animation for a new one.</p>
+      <div class="meta">
+        <span class="tag badge-in-progress" style="background:rgba(255,255,255,0.25);">In Progress</span>
+        <span class="tag">Branch: for-tests</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🖥️ Environment</h2>
+      <table class="info-table">
+        <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+        <tbody>
+          <tr><td>Machine</td><td>MacBook, macOS 12.7.6 (Monterey), Intel</td></tr>
+          <tr><td>Node</td><td>20.16.0 via nvm</td></tr>
+          <tr><td>Branch</td><td><code>for-tests</code></td></tr>
+          <tr><td>Device</td><td>Android phone via Expo Go SDK 52</td></tr>
+          <tr><td>API</td><td>Running locally — Node/Express, port 3000</td></tr>
+          <tr><td>CMS</td><td>Running locally — Node/Express, port 5000</td></tr>
+          <tr><td>Database</td><td>PostgreSQL 14 via Homebrew (no Docker)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>⚙️ Setup Steps</h2>
+      <ol class="steps">
+        <li><span class="step-num">1</span> Switched Node to 20.16.0 via <code>nvm use 20.16.0</code></li>
+        <li><span class="step-num">2</span> Installed PostgreSQL 14 via Homebrew — Docker 17.03 too old for compose v3.4</li>
+        <li><span class="step-num">3</span> Fixed <code>packages/api/.env</code> — set <code>DATABASE_HOST=localhost</code></li>
+        <li><span class="step-num">4</span> Fixed <code>packages/cms/.env</code> — changed <code>DATABASE_HOST=postgres</code> → <code>localhost</code></li>
+        <li><span class="step-num">5</span> Ran <code>yarn</code> to install all workspace dependencies</li>
+        <li><span class="step-num">6</span> Ran <code>yarn copy-config</code> to create env files from <code>.env.dist</code> templates</li>
+        <li><span class="step-num">7</span> Cleared git index for submodule paths, then ran <code>yarn modules</code></li>
+        <li><span class="step-num">8</span> Compiled <code>@oky/core</code> before starting CMS (<code>yarn workspace @oky/core compile</code>)</li>
+        <li><span class="step-num">9</span> Started API: <code>yarn workspace @oky/api watch</code></li>
+        <li><span class="step-num">10</span> Started CMS: <code>yarn workspace @oky/oky-cms start</code></li>
+        <li><span class="step-num">11</span> Started app: <code>yarn dev:app</code></li>
+        <li><span class="step-num">12</span> Installed Expo Go SDK 52 APK on Android device (SDK 54 incompatible)</li>
+        <li><span class="step-num">13</span> Updated <code>app/.env</code> with local network IP (<code>192.168.1.16</code>)</li>
+        <li><span class="step-num">14</span> ✅ App confirmed running on Android via Expo Go</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h2>🎬 Lottie Animation</h2>
+      <h3>Existing animation</h3>
+      <p>One Lottie file: <code>app/src/resources/assets/lottie/avatar.json</code> — used for both panda and unicorn avatars. The <code>Avatar</code> component drives it with frame-range sequences (30 frames total: wave, jump, four dance moves).</p>
+
+      <h3>Swap</h3>
+      <div class="placeholder">To be completed — new Lottie JSON added and wired to unicorn avatar.</div>
+
+      <h3>Screenshots / Video</h3>
+      <div class="placeholder">To be added — video of app running and new Lottie animation in action.</div>
+    </div>
+
+    <div class="card">
+      <h2>📎 Artefacts</h2>
+      <table class="info-table">
+        <thead><tr><th>Item</th><th>Link / Location</th></tr></thead>
+        <tbody>
+          <tr><td>Screenshot — app running</td><td><em>to be added</em></td></tr>
+          <tr><td>Video — app running</td><td><em>to be added</em></td></tr>
+          <tr><td>Screenshot — new Lottie running</td><td><em>to be added</em></td></tr>
+          <tr><td>Video — new Lottie running</td><td><em>to be added</em></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <footer>
+    <p><a href="index.html">← Back to overview</a> &nbsp;|&nbsp; <a href="task2.html">Task 2 →</a></p>
+  </footer>
+
+</body>
+</html>
