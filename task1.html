@@ -161,19 +161,34 @@
 
         <div class="tl-item">
           <div class="tl-dot green"></div>
-          <h4>9 — IP address for physical device</h4>
-          <p>Ngrok tunnel failed (requires registered account). Used direct LAN connection instead — updated <code>app/.env</code> with the local network IP shown in Metro output.</p>
+          <h4>9 — Connect Android device on local network</h4>
+          <p>To scan the Expo QR code from a physical Android device, both the Mac and the phone must be on the same Wi-Fi network. Metro broadcasts on the machine's LAN IP — set that IP in <code>app/.env</code> so API calls from the app reach the local server.</p>
           <div class="terminal">
-            <span class="comment"># app/.env</span><br>
-            <span class="out">EXPO_PUBLIC_API_BASE_URL=http://192.168.1.16:3000</span><br>
-            <span class="out">EXPO_PUBLIC_API_BASE_CMS_URL=http://192.168.1.16:5000</span>
+            <span class="comment"># Find your LAN IP — shown in Metro output, or run:</span><br>
+            <span class="prompt">$ </span>ipconfig getifaddr en0<br>
+            <span class="out">192.168.x.x</span><br><br>
+            <span class="comment"># Set in app/.env</span><br>
+            <span class="out">EXPO_PUBLIC_API_BASE_URL=http://192.168.x.x:3000</span><br>
+            <span class="out">EXPO_PUBLIC_API_BASE_CMS_URL=http://192.168.x.x:5000</span><br><br>
+            <span class="comment"># Start the app from the project root</span><br>
+            <span class="prompt">$ </span>cd app &amp;&amp; npx expo start<br>
+            <span class="comment"># Scan the QR code in terminal with Expo Go (SDK 52) on Android</span>
           </div>
         </div>
 
         <div class="tl-item">
           <div class="tl-dot green"></div>
           <h4>✅ 10 — App running on Android</h4>
-          <p>App confirmed running on Android device via Expo Go SDK 52. API on port 3000, CMS on port 5000, PostgreSQL on localhost.</p>
+          <p>Scanned the QR code from Metro using Expo Go SDK 52 on a Nokia Android device. App loaded, connected to the local API (port 3000) and CMS (port 5000) over LAN. Both services must be running before scanning or the app will show a network error on launch.</p>
+          <div class="terminal">
+            <span class="comment"># Quick-start checklist before scanning</span><br>
+            <span class="out">✓ PostgreSQL running (brew services start postgresql@14)</span><br>
+            <span class="out">✓ API running on port 3000 (yarn workspace @oky/api watch)</span><br>
+            <span class="out">✓ CMS running on port 5000 (yarn workspace @oky/oky-cms start)</span><br>
+            <span class="out">✓ app/.env has correct LAN IP</span><br>
+            <span class="out">✓ Phone on same Wi-Fi as Mac</span><br>
+            <span class="out">✓ Expo Go SDK 52 installed on Android</span>
+          </div>
         </div>
 
       </div>
