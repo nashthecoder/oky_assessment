@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oky CMS — Proposed Navigation UI</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" />
+  <style>
+    /* ── Base (unchanged from current CMS) ───────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body, html {
+      margin: 0;
+      font-family: 'Lato', sans-serif;
+      background: #f2f2f2;
+      color: #333;
+    }
+
+    /* ── Top navbar (unchanged) ──────────────────────────────────────── */
+    .navbar {
+      height: 100px;
+      width: 100%;
+      background-color: #ffffff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    .navbar-brand img { height: 50px; margin-left: 80px; }
+    .navbar h5 { font-size: 23px; color: rgb(64,135,216); margin: 0; }
+    .navbar-actions { display: flex; align-items: center; gap: 1rem; }
+    .navbar-actions a { color: rgb(64,135,216); font-weight: 600; text-decoration: none; }
+    .navbar-actions a:hover { text-decoration: underline; }
+    .lang-btn {
+      border: 1px solid rgb(64,135,216);
+      background: transparent;
+      color: rgb(64,135,216);
+      border-radius: 4px;
+      padding: 4px 12px;
+      cursor: pointer;
+      font-family: 'Lato', sans-serif;
+    }
+
+    /* ── Sidebar (proposed) ──────────────────────────────────────────── */
+    .sideBar {
+      position: fixed;
+      top: 100px;
+      left: 0;
+      width: 250px;
+      height: calc(100vh - 100px);
+      background-color: rgb(64,135,216);
+      overflow-y: auto;
+      overflow-x: hidden;
+      z-index: 25;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem 0 2rem;
+    }
+
+    /* ── PROPOSED: nav groups ────────────────────────────────────────── */
+    .nav-group { margin-bottom: 0.25rem; }
+
+    .nav-group-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      padding: 0.9rem 1.25rem 0.3rem;
+      margin: 0;
+      display: block;
+    }
+
+    .nav-group a {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.55rem 1.25rem;
+      color: rgba(255,255,255,0.88);
+      text-decoration: none;
+      font-size: 0.9rem;
+      border-left: 3px solid transparent;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+
+    .nav-group a i {
+      width: 16px;
+      text-align: center;
+      opacity: 0.8;
+    }
+
+    .nav-group a:hover {
+      background: rgba(0,0,0,0.12);
+      color: #ffffff;
+      border-left-color: rgba(255,255,255,0.4);
+    }
+
+    /* ── PROPOSED: active state ──────────────────────────────────────── */
+    .nav-group a.active {
+      background: rgba(0,0,0,0.2);
+      color: #ffffff;
+      font-weight: 700;
+      border-left-color: #ffffff;
+    }
+    .nav-group a.active i { opacity: 1; }
+
+    /* ── PROPOSED: special links (same yellow as current) ────────────── */
+    .nav-group a.special { color: rgb(251,255,0); }
+    .nav-group a.special:hover, .nav-group a.special.active { color: rgb(251,255,0); }
+
+    .nav-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.15);
+      margin: 0.5rem 1.25rem;
+    }
+
+    /* ── Main content area (unchanged) ──────────────────────────────── */
+    .mainContentContainer {
+      margin-left: 250px;
+      margin-top: 100px;
+      padding: 2rem;
+      min-height: calc(100vh - 100px);
+    }
+
+    /* ── Demo page content ───────────────────────────────────────────── */
+    .demo-page {
+      background: white;
+      border-radius: 6px;
+      padding: 2rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+    .demo-page h2 { color: rgb(64,135,216); text-align: left; margin-bottom: 1rem; }
+    .demo-note {
+      background: #fff8e1;
+      border-left: 4px solid #ffc107;
+      padding: 1rem 1.25rem;
+      border-radius: 0 4px 4px 0;
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+    .demo-note strong { color: #333; }
+
+    /* ── Page switcher (demo only) ───────────────────────────────────── */
+    .page-switcher {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .page-btn {
+      padding: 6px 14px;
+      font-size: 0.82rem;
+      border: 1px solid rgb(64,135,216);
+      background: white;
+      color: rgb(64,135,216);
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Lato', sans-serif;
+      transition: background 0.15s;
+    }
+    .page-btn:hover { background: rgb(64,135,216); color: white; }
+
+    /* ── Comparison table ────────────────────────────────────────────── */
+    .comparison { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    .comparison th { background: rgb(64,135,216); color: white; padding: 0.6rem 1rem; text-align: left; }
+    .comparison td { padding: 0.55rem 1rem; border-bottom: 1px solid #eee; vertical-align: top; }
+    .comparison tr:nth-child(even) td { background: #fafafa; }
+    .tag { display: inline-block; font-size: 0.72rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; }
+    .tag-new { background: #e8f5e9; color: #2e7d32; }
+    .tag-keep { background: #e3f2fd; color: #1565c0; }
+  </style>
+</head>
+<body>
+
+  <!-- Top navbar (unchanged) -->
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <img src="https://raw.githubusercontent.com/Oky-period-tracker/periodtracker/master/packages/cms/src/public/assets/images/logo.png"
+           onerror="this.style.display='none'; this.nextSibling.style.display='block'"
+           alt="Oky logo" />
+      <span style="display:none; font-weight:700; color:rgb(64,135,216); font-size:1.4rem;">Oky CMS</span>
+    </div>
+    <h5>Welcome admin</h5>
+    <div class="navbar-actions">
+      <button class="lang-btn">English</button>
+      <a href="#">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Proposed sidebar -->
+  <aside class="sideBar" id="sidebar">
+
+    <!-- CONTENT group -->
+    <div class="nav-group">
+      <span class="nav-group-label">Content</span>
+      <a href="#" data-page="encyclopedia" class="active">
+        <i class="fas fa-book-open"></i> Encyclopedia
+      </a>
+      <a href="#" data-page="didyouknow">
+        <i class="fas fa-lightbulb"></i> Did You Knows
+      </a>
+      <a href="#" data-page="avatar">
+        <i class="fas fa-comment-dots"></i> Avatar Messages
+      </a>
+      <a href="#" data-page="quiz">
+        <i class="fas fa-question-circle"></i> Quiz
+      </a>
+      <a href="#" data-page="survey">
+        <i class="fas fa-poll"></i> Survey
+      </a>
+    </div>
+
+    <div class="nav-divider"></div>
+
+    <!-- APP INFO group -->
+    <div class="nav-group">
+      <span class="nav-group-label">App Info</span>
+      <a href="#" data-page="about">
+        <i class="fas fa-info-circle"></i> About
+      </a>
+      <a href="#" data-page="privacy">
+        <i class="fas fa-shield-alt"></i> Privacy Policy
+      </a>
+      <a href="#" data-page="terms">
+        <i class="fas fa-file-contract"></i> Terms &amp; Conditions
+      </a>
+      <a href="#" data-page="helpcenter">
+        <i class="fas fa-hands-helping"></i> Help Centers
+      </a>
+    </div>
+
+    <div class="nav-divider"></div>
+
+    <!-- COMMUNICATION group -->
+    <div class="nav-group">
+      <span class="nav-group-label">Communication</span>
+      <a href="#" data-page="notifications">
+        <i class="fas fa-bell"></i> Notifications
+      </a>
+      <a href="#" data-page="messages" class="special">
+        <i class="fas fa-envelope"></i> User Messages
+      </a>
+    </div>
+
+    <div class="nav-divider"></div>
+
+    <!-- INSIGHTS group -->
+    <div class="nav-group">
+      <span class="nav-group-label">Insights</span>
+      <a href="#" data-page="analytics">
+        <i class="fas fa-chart-bar"></i> User Analytics
+      </a>
+    </div>
+
+    <div class="nav-divider"></div>
+
+    <!-- ADMIN group -->
+    <div class="nav-group">
+      <span class="nav-group-label">Admin</span>
+      <a href="#" data-page="data">
+        <i class="fas fa-database"></i> Data Management
+      </a>
+      <a href="#" data-page="users" class="special">
+        <i class="fas fa-users-cog"></i> User Management
+      </a>
+    </div>
+
+  </aside>
+
+  <!-- Main content -->
+  <main class="mainContentContainer">
+    <div class="demo-page">
+
+      <div class="demo-note">
+        <strong>This is a UI proposal only.</strong> Click any nav link in the sidebar to see the active state update.
+        Use the buttons below to simulate navigating to different sections.
+      </div>
+
+      <h2 id="page-title">Encyclopedia</h2>
+
+      <div class="page-switcher">
+        <button class="page-btn" onclick="setPage('encyclopedia')">Encyclopedia</button>
+        <button class="page-btn" onclick="setPage('didyouknow')">Did You Knows</button>
+        <button class="page-btn" onclick="setPage('avatar')">Avatar Messages</button>
+        <button class="page-btn" onclick="setPage('quiz')">Quiz</button>
+        <button class="page-btn" onclick="setPage('survey')">Survey</button>
+        <button class="page-btn" onclick="setPage('about')">About</button>
+        <button class="page-btn" onclick="setPage('privacy')">Privacy Policy</button>
+        <button class="page-btn" onclick="setPage('terms')">Terms &amp; Conditions</button>
+        <button class="page-btn" onclick="setPage('helpcenter')">Help Centers</button>
+        <button class="page-btn" onclick="setPage('notifications')">Notifications</button>
+        <button class="page-btn" onclick="setPage('messages')">User Messages</button>
+        <button class="page-btn" onclick="setPage('analytics')">Analytics</button>
+        <button class="page-btn" onclick="setPage('data')">Data Management</button>
+        <button class="page-btn" onclick="setPage('users')">User Management</button>
+      </div>
+
+      <hr style="margin-bottom:1.5rem;" />
+
+      <h4 style="color:#555; margin-bottom:1rem;">What changed vs current sidebar</h4>
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Issue in current UI</th>
+            <th>Proposed fix</th>
+            <th>What stayed the same</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>All 14 links in one flat unsorted list</td>
+            <td><span class="tag tag-new">New</span> Links grouped into 5 labelled sections: Content, App Info, Communication, Insights, Admin</td>
+            <td><span class="tag tag-keep">Same</span> All links present, same labels</td>
+          </tr>
+          <tr>
+            <td>No active state — impossible to tell which page you're on</td>
+            <td><span class="tag tag-new">New</span> Active link gets white left border + bold text + darker background</td>
+            <td><span class="tag tag-keep">Same</span> Blue sidebar background <code>rgb(64,135,216)</code></td>
+          </tr>
+          <tr>
+            <td>No hover feedback</td>
+            <td><span class="tag tag-new">New</span> Subtle dark overlay on hover with left border indicator</td>
+            <td><span class="tag tag-keep">Same</span> Yellow highlight <code>rgb(251,255,0)</code> for special links</td>
+          </tr>
+          <tr>
+            <td>No icons — hard to scan quickly</td>
+            <td><span class="tag tag-new">New</span> Font Awesome icons per link (already loaded in current CMS)</td>
+            <td><span class="tag tag-keep">Same</span> Font, sidebar width, top navbar unchanged</td>
+          </tr>
+          <tr>
+            <td>No visual separation between sections</td>
+            <td><span class="tag tag-new">New</span> Subtle dividers + uppercase section labels</td>
+            <td><span class="tag tag-keep">Same</span> Logout and language switcher in top navbar</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </main>
+
+  <script>
+    const labels = {
+      encyclopedia: 'Encyclopedia',
+      didyouknow: 'Did You Knows',
+      avatar: 'Avatar Messages',
+      quiz: 'Quiz',
+      survey: 'Survey',
+      about: 'About',
+      privacy: 'Privacy Policy',
+      terms: 'Terms & Conditions',
+      helpcenter: 'Help Centers',
+      notifications: 'Notifications',
+      messages: 'User Messages',
+      analytics: 'User Analytics',
+      data: 'Data Management',
+      users: 'User Management',
+    }
+
+    function setPage(page) {
+      document.querySelectorAll('.sideBar a').forEach(a => a.classList.remove('active'))
+      const link = document.querySelector(`.sideBar a[data-page="${page}"]`)
+      if (link) link.classList.add('active')
+      document.getElementById('page-title').textContent = labels[page] || page
+    }
+
+    document.querySelectorAll('.sideBar a').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault()
+        setPage(a.dataset.page)
+      })
+    })
+  </script>
+</body>
+</html>
