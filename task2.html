@@ -44,7 +44,13 @@
     <div class="card">
       <h2>🏗️ Approach</h2>
       <h3>CMS changes</h3>
-      <div class="placeholder">To be completed — implementation decisions and CMS field addition.</div>
+      <ol class="steps">
+        <li><span class="step-num">1</span><span><strong>Content filter options</strong> — Added <em>Urban only</em> and <em>Rural only</em> options to <code>contentFilterOptions</code> in <code>packages/cms/src/optional.ts</code>. Fixed a bug where the <code>??</code> fallback used <code>[]</code> instead of the local defaults, causing the dropdown to render empty when <code>@oky/core</code> does not export the field.</span></li>
+        <li><span class="step-num">2</span><span><strong>Form data wiring</strong> — Added <code>contentFilter</code> and <code>ageRestrictionLevel</code> to the article save payload in <code>subcategoryViewScript.js</code> so values are submitted to the API on create/edit.</span></li>
+        <li><span class="step-num">3</span><span><strong>Modal template fix</strong> — The <code>ArticleModal.ejs</code> include in both <code>Subcategory.ejs</code> and <code>Encyclopedia.ejs</code> was not passing <code>contentFilterOptions</code> or <code>ageRestrictionOptions</code> to the partial. Updated both includes to forward the variables so the server-side EJS loop can render the options.</span></li>
+        <li><span class="step-num">4</span><span><strong>UI improvement — modal layout</strong> — The original Insert Article modal did not surface the Filter field prominently; it was hidden at the bottom and partially cut off. Restructured the modal body from a dense single-column layout into a responsive two-column row (Bootstrap <code>form-row</code> grid), grouping Filter, Age Restriction, and Live toggle side by side so all fields are visible at a glance without scrolling. This was necessary to make the content-targeting workflow usable for CMS editors.</span></li>
+        <li><span class="step-num">5</span><span><strong>DataTable column</strong> — Added a <em>Filter</em> column to the article list DataTable, rendering the human-readable label (All / Urban only / Rural only) by looking up the stored integer value against the options array injected as a JSON script tag.</span></li>
+      </ol>
       <h3>API changes</h3>
       <div class="placeholder">To be completed — endpoint and data model changes.</div>
       <h3>App changes</h3>
