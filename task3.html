@@ -42,37 +42,33 @@
       </ol>
       <h3>Preparation notes — video script bullets</h3>
 
-      <h3 style="color:var(--tertiary);margin-top:18px;">🙋 To the user</h3>
+      <h3 style="color:var(--tertiary);margin-top:18px;">1. What the change does and how it does it</h3>
       <ul style="font-size:0.9rem;line-height:1.9;color:#444;padding-left:20px;margin-bottom:6px;">
-        <li>You tap Edit Profile on iPhone — the app crashes and throws you out completely</li>
-        <li>No warning, no error — just suddenly back at your home screen</li>
-        <li>It happens because your details hadn't fully loaded yet when the screen opened</li>
-        <li>The app reached for your information, found nothing, and didn't know what to do</li>
-        <li>After the fix — it checks first before trying to load anything</li>
-        <li>If your details aren't ready, it waits quietly instead of crashing</li>
-        <li>You stay inside the app — no more random kick-outs</li>
+        <li>On iPhone, tapping Edit Profile could crash the app — no warning, just kicked out</li>
+        <li>The app was trying to display your profile details before they had fully loaded into memory</li>
+        <li>It reached for the data, found nothing, and didn't know what to do — so it crashed</li>
+        <li>The fix teaches the app to check first: <em>do I actually have this person's details?</em></li>
+        <li>If yes — opens normally. If not — waits quietly instead of crashing</li>
+        <li>User stays inside the app either way</li>
       </ul>
 
-      <h3 style="color:var(--secondary);margin-top:18px;">📊 To the stakeholder</h3>
+      <h3 style="color:var(--secondary);margin-top:18px;">2. Issues to raise before approving</h3>
       <ul style="font-size:0.9rem;line-height:1.9;color:#444;padding-left:20px;margin-bottom:6px;">
-        <li>Girls on iPhone were being crashed out of the app when trying to edit their profile</li>
-        <li>No data was lost — but the experience was broken and trust-eroding for a young audience</li>
-        <li>The root cause: the app assumed user data would always be ready — it wasn't always</li>
-        <li>This fix closes that gap — the screen now handles missing data gracefully</li>
-        <li>Risk reduced: one less crash path on iOS, which is a significant share of Oky users</li>
-        <li>Outstanding: the fix shows a blank screen momentarily — not harmful, but not polished for a 10-year-old user</li>
-        <li>Recommend: follow-up ticket for a loading state and investigation into what triggers the race condition</li>
+        <li>The fix shows a <strong>blank screen</strong> when data isn't ready — safe, but silent</li>
+        <li>For a girl aged 10 tapping Edit Profile and seeing nothing, blank = broken. She doesn't know if the app is loading, frozen, or has lost her data</li>
+        <li>A loading indicator or a gentle "just a moment" message would be far less alarming for this age group</li>
+        <li>The crash is fixed — but <em>why</em> the data arrives null isn't explained or addressed. If it's a logout race condition, it could surface elsewhere in the app</li>
+        <li>No mention of testing on an actual device against the specific crash scenario — important for an iOS-specific bug</li>
       </ul>
 
-      <h3 style="color:var(--primary-dark);margin-top:18px;">💻 To the developer</h3>
+      <h3 style="color:var(--primary-dark);margin-top:18px;">3. Approve or request changes — feedback to the dev</h3>
       <ul style="font-size:0.9rem;line-height:1.9;color:#444;padding-left:20px;margin-bottom:6px;">
-        <li>Removing the <code>as User</code> cast is the right call — it was hiding a real nullable from TypeScript</li>
-        <li>The <code>useMemo</code> null guard and early return are correct and clean</li>
-        <li>The fallback state in <code>useReducer</code> is dead code — the early return fires first, so it's never reached; remove it or add a comment explaining why it's there</li>
-        <li>Returning <code>null</code> is safe but silent — consider a loading spinner or redirect for this age group</li>
-        <li>The fix treats the symptom — what triggers the null in the first place? Race condition on logout? Worth a follow-up ticket</li>
-        <li>No test coverage mentioned — given this is iOS-specific, a device test against the crash scenario should be confirmed before merge</li>
-        <li><strong>Decision: request changes</strong> — replace null render with a loading state, remove dead fallback code; crash fix itself is correct and should go in once those are addressed</li>
+        <li>Removing the <code>as User</code> cast is correct — it was hiding a real null from TypeScript and masking the bug</li>
+        <li>The null guard in <code>useMemo</code> and the early return are clean and right</li>
+        <li>The fallback state in <code>useReducer</code> is dead code — the early return fires first so those values are never used. Remove or comment it</li>
+        <li>Replace <code>return null</code> with a loading spinner — returning nothing is not appropriate UX for this audience</li>
+        <li>Raise a follow-up ticket: what causes the null? Race condition on logout? That underlying issue needs its own fix</li>
+        <li><strong>Decision: request changes</strong> — the crash fix is correct and should go in, but not before the blank screen is replaced with a loading state and the dead code is cleaned up</li>
       </ul>
 
     </div>
