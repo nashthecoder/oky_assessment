@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Task 2 — Sample Content</title>
   <link rel="stylesheet" href="style.css">
+  <script>
+    if (window.self !== window.top) {
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('.navbar').style.display = 'none';
+        document.querySelector('footer').style.display = 'none';
+        document.querySelector('.page').style.paddingTop = '16px';
+      });
+    }
+  </script>
 </head>
 <body class="page-task2">
 
