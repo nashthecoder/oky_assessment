@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 2 — Sample Content</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-task2">
+
+  <div class="navbar">
+    <a class="brand" href="index.html">
+      <div class="logo">🌸</div>
+      <span>Oky Assessment</span>
+    </a>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="task1.html">Task 1</a>
+      <a href="task2.html" class="active">Task 2</a>
+      <a href="task3.html">Task 3</a>
+    </nav>
+  </div>
+
+  <div class="page">
+
+    <div class="hero">
+      <h1>Task 2 — Sample Content</h1>
+      <p>Two test articles used to demonstrate the urban/rural content filter in the CMS and app. One targets rural users only; the other is visible to everyone.</p>
+      <div class="meta">
+        <span class="tag">Demo content only</span>
+        <span class="tag">Used in Task 2 video demo</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>How to use this content</h2>
+      <ol class="steps">
+        <li><span class="step-num">1</span>Log into the CMS and navigate to <strong>Encyclopedia → Subcategory</strong></li>
+        <li><span class="step-num">2</span>Click <strong>Insert New Article</strong> and copy the fields from Article 1 below — set Filter to <strong>Rural only</strong></li>
+        <li><span class="step-num">3</span>Repeat for Article 2 — set Filter to <strong>All</strong></li>
+        <li><span class="step-num">4</span>Set both articles to <strong>Live</strong></li>
+        <li><span class="step-num">5</span>Register in the app as a <strong>rural</strong> user → both articles visible</li>
+        <li><span class="step-num">6</span>Register in the app as an <strong>urban</strong> user → only Article 2 visible</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h2>Article 1 — Rural only</h2>
+      <table class="info-table">
+        <tbody>
+          <tr>
+            <th style="width:180px;">Category</th>
+            <td>Health</td>
+          </tr>
+          <tr>
+            <th>Subcategory</th>
+            <td>Period pain</td>
+          </tr>
+          <tr>
+            <th>Article Title</th>
+            <td>Managing period pain without a pharmacy nearby</td>
+          </tr>
+          <tr>
+            <th>Article Content</th>
+            <td>
+              If you live far from a pharmacy or clinic, there are safe ways to ease period pain at home.<br><br>
+              Try placing a warm cloth or heated water bottle on your lower belly — warmth relaxes the muscles and can reduce cramping.<br><br>
+              Gentle movement like walking or stretching can also help blood flow and reduce pain. Staying hydrated and resting when you can makes a difference too.<br><br>
+              If your pain is very severe or lasts more than a few days, try to reach a health worker or community clinic as soon as you are able.
+            </td>
+          </tr>
+          <tr>
+            <th>Filter</th>
+            <td><strong style="color:#e57373;">Rural only</strong></td>
+          </tr>
+          <tr>
+            <th>Age Restriction</th>
+            <td>All ages</td>
+          </tr>
+          <tr>
+            <th>Live</th>
+            <td>Yes ✓</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Article 2 — All users</h2>
+      <table class="info-table">
+        <tbody>
+          <tr>
+            <th style="width:180px;">Category</th>
+            <td>Health</td>
+          </tr>
+          <tr>
+            <th>Subcategory</th>
+            <td>Period pain</td>
+          </tr>
+          <tr>
+            <th>Article Title</th>
+            <td>Understanding period cramps</td>
+          </tr>
+          <tr>
+            <th>Article Content</th>
+            <td>
+              Period cramps (also called dysmenorrhoea) happen because your uterus contracts to shed its lining. This is completely normal.<br><br>
+              The cramps usually start one to two days before your period begins and last two to three days. They are felt in the lower belly, lower back, or thighs.<br><br>
+              Light exercise, rest, and staying warm can help. Over-the-counter pain relief such as ibuprofen or paracetamol can also reduce pain — always follow the dosage instructions on the packet.<br><br>
+              Talk to a doctor or health worker if cramps are severe enough to stop you going to school or doing daily activities.
+            </td>
+          </tr>
+          <tr>
+            <th>Filter</th>
+            <td><strong style="color:#81c784;">All</strong></td>
+          </tr>
+          <tr>
+            <th>Age Restriction</th>
+            <td>All ages</td>
+          </tr>
+          <tr>
+            <th>Live</th>
+            <td>Yes ✓</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Expected result after filtering</h2>
+      <table class="info-table">
+        <thead>
+          <tr><th>User type</th><th>Article 1 (Rural only)</th><th>Article 2 (All)</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Rural</strong></td>
+            <td><span class="badge badge-done">Visible</span></td>
+            <td><span class="badge badge-done">Visible</span></td>
+          </tr>
+          <tr>
+            <td><strong>Urban</strong></td>
+            <td><span class="badge badge-not-started">Hidden</span></td>
+            <td><span class="badge badge-done">Visible</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <footer>
+    <p><a href="task2.html">← Back to Task 2</a> &nbsp;|&nbsp; <a href="index.html">Overview</a></p>
+  </footer>
+
+</body>
+</html>
