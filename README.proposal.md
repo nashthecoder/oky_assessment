@@ -204,7 +204,16 @@ Wait until the logs show the API and CMS are ready before starting the app.
 
 #### Without Docker (macOS — PostgreSQL via Homebrew)
 
-If Docker Desktop 4.x is not available (e.g. older machine), run the services directly.
+> **When would a developer not have Docker?**
+>
+> - Their machine has an old Docker Toolbox install (pre-2017) — the in-app updater does not offer Docker Desktop 4.x, which must be downloaded separately from docker.com
+> - Corporate or institutional machines where IT policy blocks Docker Desktop installation
+> - Low-spec machines (under 8 GB RAM) where Docker Desktop runs too slowly to be practical
+> - Developers who prefer a native stack and have PostgreSQL already installed
+>
+> In all these cases, running PostgreSQL via Homebrew and starting services directly is a fully supported alternative.
+
+If Docker Desktop 4.x is not available, run the services directly.
 
 **One-time database setup:**
 
@@ -242,6 +251,16 @@ psql -U periodtracker -d periodtracker -c "INSERT INTO \"periodtracker\".\"user\
 ```
 
 > **Errors like "already exists" from the migration files are safe to ignore** — `create-tables.sql` is the consolidated schema and already includes those columns and tables.
+
+**Load seed content (optional but recommended):**
+
+The resources submodule includes English encyclopedia content, quizzes, surveys, and did-you-knows. Load it with one command — the app will have real content immediately:
+
+```bash
+psql -U periodtracker -d periodtracker -f app/src/resources/translations/content/insert-content-en.sql
+```
+
+> For other languages, the equivalent file is `insert-content-<locale>.sql` in the same directory. Run `yarn modules` first to ensure the resources submodule is present.
 
 > **IMPORTANT — secure the CMS after first login:** go to `http://localhost:5000`, log in as `admin`/`admin`, create a new user with a strong password via `/user-management`, then delete the `admin` account.
 
