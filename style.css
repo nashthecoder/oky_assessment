@@ -461,3 +461,22 @@ footer p { margin-bottom: 6px; }
 footer p:last-child { margin-bottom: 0; }
 footer a { color: var(--link); text-decoration: none; }
 footer a:hover { text-decoration: underline; }
+
+/* ── Accordion ── */
+.accordion-card { padding: 0; }
+.accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 28px;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 12px;
+}
+.accordion-header:hover { background: rgba(0,0,0,0.03); }
+.accordion-arrow {
+  font-size: 0.85rem;
+  color: #aaa;
+  transition: transform 0.2s ease;
+}
+.accordion-body { padding: 0 28px 24px; }
