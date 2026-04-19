@@ -218,3 +218,66 @@ These proposals focus on documentation and GitHub configuration only. The follow
 - Setting up GitHub Discussions if not already enabled on the repository
 - Adding a `SECURITY.md` file with a formal vulnerability disclosure policy
 - CI/CD badge (build status) once a public Actions workflow is confirmed
+
+---
+
+## Bug found during assessment — `ageRestrictionOptions` missing from `@oky/core`
+
+**File:** `packages/cms/src/optional.ts`
+**Branch:** `for-tests`
+**Severity:** High — blocks all article creation in the CMS
+
+### What happens
+
+When a CMS user tries to create or save an article, the request crashes with:
+
+```
+QueryFailedError: invalid input syntax for type integer: ""
+```
+
+The article is not saved and the CMS process crashes (nodemon restarts it).
+
+### Root cause
+
+The `ageRestrictionLevel` column was added to the `article` table in migration `1740038351971-content-restriction.sql` and is typed as `integer` in the database. The CMS article form includes a dropdown for this field, populated from `ageRestrictionOptions`.
+
+However, `ageRestrictionOptions` is never exported from `@oky/core`. The fallback in `optional.ts` defaults to an empty array `[]`:
+
+```ts
+// packages/cms/src/optional.ts
+let ageRestrictionOptions = []   // ← empty — no options in dropdown
+
+try {
+  ageRestrictionOptions = require('@oky/core')?.ageRestrictionOptions ?? []
+} catch (e) { }
+```
+
+With no options, the dropdown submits an empty string `""`. PostgreSQL rejects this because the column expects an integer.
+
+The same file also defines `contentFilterOptions` — the hook for **urban/rural content targeting (Task 2)** — which correctly defaults to `[{value: 0, description: 'All'}]`. The pattern is identical; `ageRestrictionOptions` simply never received the same treatment.
+
+### Impact
+
+- No articles can be created or edited in the CMS on this branch
+- The age restriction feature is effectively non-functional for any contributor running this branch
+- The same issue likely affects quiz and survey entries which also have `ageRestrictionLevel` columns
+
+### Proposed fix
+
+Add a sensible default to `optional.ts` so the dropdown always has valid integer values, whether or not `@oky/core` exports the options:
+
+```ts
+// packages/cms/src/optional.ts
+let ageRestrictionOptions = [
+  { value: 0, description: 'All ages' },
+  { value: 1, description: 'Age restricted' },
+]
+
+try {
+  ageRestrictionOptions = require('@oky/core')?.ageRestrictionOptions ?? ageRestrictionOptions
+} catch (e) { }
+```
+
+This is the same pattern used for `contentFilterOptions` and `helpCenterData` in the same file. The fix is one line in one file and unblocks all article creation immediately.
+
+**To apply:** edit `packages/cms/src/optional.ts` and submit as a PR to the `for-tests` branch.
