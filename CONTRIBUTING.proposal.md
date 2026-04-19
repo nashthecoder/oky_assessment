@@ -62,18 +62,7 @@ Before translating, read the [Translations guide](./docs/localisation/translatio
 
 ## Setting up locally
 
-Follow the [Local Setup guide in the README](./README.md#local-setup). The short version:
-
-```bash
-git clone https://github.com/Oky-period-tracker/periodtracker.git
-cd periodtracker
-yarn install
-cp packages/api/.env.dist packages/api/.env
-cp packages/cms/.env.dist packages/cms/.env
-cp app/.env.dist app/.env
-yarn dev        # starts API + CMS + database via Docker
-yarn dev:app    # starts the Expo mobile dev server (new terminal)
-```
+Follow the [Local Setup guide in the README](./README.md#local-setup) — it covers all paths including Docker and no-Docker setups.
 
 ---
 

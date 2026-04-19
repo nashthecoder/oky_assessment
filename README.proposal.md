@@ -174,7 +174,16 @@ yarn modules
 
 > This downloads the default white-labelled assets and translations. Do not skip this step — the app will be missing content without it.
 
+> **First-run gotcha:** If `yarn modules` fails with `fatal: already exists in the index` for any submodule path, clear the stale git index entries first, then retry:
+> ```bash
+> git rm --cached .k8s app/src/resources packages/core/src/common packages/delete-account 2>/dev/null
+> yarn modules
+> ```
+> This happens when git has already registered submodule paths during clone. The `remove.sh` script clears the files but not the index — running the above fixes it.
+
 ### 5. Start the backend
+
+#### With Docker (recommended)
 
 Make sure Docker Desktop is running, then:
 
@@ -192,6 +201,53 @@ This starts everything via Docker Compose:
 | Adminer (DB UI) | <http://localhost:8080> |
 
 Wait until the logs show the API and CMS are ready before starting the app.
+
+#### Without Docker (macOS — PostgreSQL via Homebrew)
+
+If Docker Desktop 4.x is not available (e.g. older machine), run the services directly.
+
+**One-time database setup:**
+
+```bash
+brew install postgresql@14
+brew services start postgresql@14
+createuser -s periodtracker
+psql postgres -c "ALTER USER periodtracker WITH PASSWORD 'periodtracker';"
+createdb -O periodtracker periodtracker
+```
+
+**Update `.env` files** — change `DATABASE_HOST=postgres` to `DATABASE_HOST=localhost` in both:
+
+- `packages/api/.env`
+- `packages/cms/.env`
+
+**Start all three services** — run this once to open each in its own Terminal window:
+
+```bash
+osascript \
+  -e 'tell application "Terminal" to do script "cd $(pwd) && nvm use 20.16.0 && yarn workspace @oky/api watch"' \
+  -e 'tell application "Terminal" to do script "cd $(pwd) && nvm use 20.16.0 && yarn workspace @oky/core compile && yarn workspace @oky/oky-cms start"' \
+  -e 'tell application "Terminal" to do script "cd $(pwd) && nvm use 20.16.0 && yarn dev:app"'
+```
+
+Or start them manually in three separate terminals:
+
+```bash
+# Terminal 1 — API (port 3000)
+nvm use 20.16.0 && yarn workspace @oky/api watch
+
+# Terminal 2 — CMS (port 5000) — compile core first, then start
+nvm use 20.16.0 && yarn workspace @oky/core compile && yarn workspace @oky/oky-cms start
+
+# Terminal 3 — App (Metro)
+nvm use 20.16.0 && yarn dev:app
+```
+
+> **`@oky/core` must be compiled before the CMS starts.** The CMS imports from `@oky/core` — if `dist/` does not exist the CMS will crash immediately with a module resolution error. The commands above handle this automatically.
+
+> **CMS workspace name:** use `@oky/oky-cms`, not `@oky/cms` — the latter will fail with "Unknown workspace".
+
+Wait until the API logs `Application is now running` and the CMS logs `Server started on port 5000` before starting the app.
 
 ### 6. Prepare Expo Go on your device
 
@@ -317,14 +373,7 @@ Please read our [Code of Conduct](./CODE_OF_CONDUCT.md) before participating.
 
 ## Privacy & Security
 
-Oky is designed with privacy as a core principle:
-
-- No personally identifiable information is collected
-- Period data is stored locally on-device by default
-- Only anonymised, non-identifiable data is synced online (for cross-device access)
-- The app is passcode-protected and works fully offline
-
-To report a security vulnerability, please open a confidential issue or contact the maintainers directly.
+Oky collects no personally identifiable information. Period data is stored on-device; only anonymised data is optionally synced. See [SECURITY.md](./SECURITY.md) for the full policy and how to report vulnerabilities.
 
 ---
 
