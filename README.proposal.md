@@ -221,6 +221,30 @@ createdb -O periodtracker periodtracker
 - `packages/api/.env`
 - `packages/cms/.env`
 
+**One-time database schema setup:**
+
+The Docker path handles this automatically. Without Docker, run these once after PostgreSQL is running:
+
+```bash
+# 1. Create the schema
+psql -U periodtracker -d periodtracker -c "CREATE SCHEMA periodtracker;"
+
+# 2. Create all tables
+psql -U periodtracker -d periodtracker -f sql/create-tables.sql
+
+# 3. Run migrations in order
+for f in $(ls sql/[0-9]*.sql | sort); do
+  psql -U periodtracker -d periodtracker -f "$f"
+done
+
+# 4. Insert the temporary CMS admin user (username: admin, password: admin)
+psql -U periodtracker -d periodtracker -c "INSERT INTO \"periodtracker\".\"user\" (\"id\", \"username\", \"password\", \"lang\", \"date_created\", \"type\") VALUES (-1, 'admin', '\$2b\$10\$cslKchhKRBsWG.dCsspbb.mkY9.opLl1t1Oxs3j2E01/Zm3llW/Rm', 'en', NOW(), 'superAdmin');"
+```
+
+> **Errors like "already exists" from the migration files are safe to ignore** — `create-tables.sql` is the consolidated schema and already includes those columns and tables.
+
+> **IMPORTANT — secure the CMS after first login:** go to `http://localhost:5000`, log in as `admin`/`admin`, create a new user with a strong password via `/user-management`, then delete the `admin` account.
+
 **Start all three services** — run this once to open each in its own Terminal window:
 
 ```bash
