@@ -246,6 +246,18 @@
 
     </div>
 
+      <div class="bug-card">
+        <div class="bug-title">🔵 eas.json — raised with assessor, confirmed out of scope</div>
+        <p>During setup, the <code>app/src/resources/builds/</code> directory referenced in <code>app/eas.json</code> did not exist, and it was initially unclear whether <code>eas.json</code> itself was required to run the app. A query was raised with the assessment team asking whether the file or directory needed to be provided.</p>
+        <p style="margin-top:8px;"><strong>What we found:</strong> <code>eas.json</code> exists at <code>app/eas.json</code> — it was never missing. EAS (Expo Application Services) is only needed for producing distribution builds (APK/IPA). For local development via Expo Go, it is not required at all. The missing <code>builds/</code> directory is only created when an EAS build is triggered.</p>
+        <div class="bug-actions">
+          <div class="bug-fix">✅ <strong>Confirmed:</strong> Assessor (Alexandra Tyers) confirmed EAS build is not required for this task — running locally via Expo Go is sufficient. Timeline extended to 22 April CoB CET.</div>
+          <div class="bug-propose">💡 <strong>Note for repo:</strong> A comment in the README clarifying that EAS is only needed for distribution builds — not local development — would prevent this confusion for future contributors.</div>
+        </div>
+      </div>
+
+    </div>
+
     <!-- Proposed changes -->
     <div class="card">
       <h2>📝 Proposed Repo Improvements</h2>
