@@ -341,8 +341,7 @@ EXPO_PUBLIC_API_BASE_CMS_URL=http://<your-ip>:5000
 
 Then press `r` in the Metro terminal to reload, and scan the QR code with Expo Go.
 
-> **IP changes between sessions.** If you switch networks or restart your Mac, your IP may change. Always check the IP Metro shows in its output (`exp://x.x.x.x:8081`) and update `app/.env` to match before scanning.
-> **Tunnel (ngrok) is not recommended.** `npx expo start --tunnel` requires a registered ngrok account and authtoken — it will fail for most contributors out of the box.
+> **IP changes between sessions.** If you switch networks or restart your Mac, your LAN IP may change. Run `ipconfig getifaddr en0` (Mac) to get the current IP, or check the address Metro prints in its output (`exp://x.x.x.x:8081`). Update `app/.env` to match before scanning.
 
 **Done.** The app should be running on your device.
 
