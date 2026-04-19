@@ -48,9 +48,46 @@
         <li><span class="step-num">1</span><span><strong>Content filter options</strong> — Added <em>Urban only</em> and <em>Rural only</em> options to <code>contentFilterOptions</code> in <code>packages/cms/src/optional.ts</code>. Fixed a bug where the <code>??</code> fallback used <code>[]</code> instead of the local defaults, causing the dropdown to render empty when <code>@oky/core</code> does not export the field.</span></li>
         <li><span class="step-num">2</span><span><strong>Form data wiring</strong> — Added <code>contentFilter</code> and <code>ageRestrictionLevel</code> to the article save payload in <code>subcategoryViewScript.js</code> so values are submitted to the API on create/edit.</span></li>
         <li><span class="step-num">3</span><span><strong>Modal template fix</strong> — The <code>ArticleModal.ejs</code> include in both <code>Subcategory.ejs</code> and <code>Encyclopedia.ejs</code> was not passing <code>contentFilterOptions</code> or <code>ageRestrictionOptions</code> to the partial. Updated both includes to forward the variables so the server-side EJS loop can render the options.</span></li>
-        <li><span class="step-num">4</span><span><strong>UI improvement — modal layout</strong> — The original Insert Article modal did not surface the Filter field prominently; it was hidden at the bottom and partially cut off. Restructured the modal body from a dense single-column layout into a responsive two-column row (Bootstrap <code>form-row</code> grid), grouping Filter, Age Restriction, and Live toggle side by side so all fields are visible at a glance without scrolling. This was necessary to make the content-targeting workflow usable for CMS editors.</span></li>
+        <li><span class="step-num">4</span><span><strong>UI improvement — modal layout</strong> — Before this task could be completed, the Insert Article form had to be restructured. The original layout crammed all fields into a horizontal DataTable-style row, making the Filter field invisible and unusable. The form was rebuilt as a vertical stacked layout using Bootstrap <code>form-row</code> grid — Category/Subcategory on one row, then Article Title, Article Content, and finally Filter/Age Restriction/Live as a 3-column bottom row. See before/after below.</span></li>
         <li><span class="step-num">5</span><span><strong>DataTable column</strong> — Added a <em>Filter</em> column to the article list DataTable, rendering the human-readable label (All / Urban only / Rural only) by looking up the stored integer value against the options array injected as a JSON script tag.</span></li>
       </ol>
+
+      <h3>Insert Article — Before &amp; After</h3>
+      <p>The UI improvement was a prerequisite for Task 2. Without it, CMS editors had no way to assign urban/rural targeting to an article.</p>
+      <div style="display:flex; gap:1.5rem; flex-wrap:wrap; margin-top:1rem;">
+        <div style="flex:1; min-width:280px;">
+          <p style="text-align:center; font-weight:600; margin-bottom:0.5rem; color:#e57373;">Before — Filter field hidden / empty</p>
+          <img src="images/insert_new_article_oldform.png" alt="Old insert article form — filter field not visible" style="width:100%; border-radius:6px; border:2px solid #e57373;">
+          <ul style="margin-top:0.75rem; font-size:0.9rem; line-height:1.7;">
+            <li>All fields crammed into a single horizontal row</li>
+            <li>Filter dropdown rendered with no options (empty)</li>
+            <li><code>contentFilterOptions</code> &amp; <code>ageRestrictionOptions</code> not passed to the EJS partial</li>
+            <li><code>optional.ts</code> fallback was <code>??&nbsp;[]</code> — wiped defaults when <code>@oky/core</code> didn't export the field</li>
+          </ul>
+        </div>
+        <div style="flex:1; min-width:280px;">
+          <p style="text-align:center; font-weight:600; margin-bottom:0.5rem; color:#81c784;">After — Filter field visible &amp; functional</p>
+          <img src="images/insert_new_article_newform.png" alt="New insert article form — filter field showing All / Urban only / Rural only" style="width:100%; border-radius:6px; border:2px solid #81c784;">
+          <ul style="margin-top:0.75rem; font-size:0.9rem; line-height:1.7;">
+            <li>Vertical stacked layout — each field has space to breathe</li>
+            <li>Filter dropdown shows <strong>All / Urban only / Rural only</strong></li>
+            <li>Both view includes updated to forward <code>contentFilterOptions</code></li>
+            <li><code>optional.ts</code> fallback changed to <code>??&nbsp;contentFilterOptions</code> to preserve local defaults</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Key code changes</h3>
+      <table class="info-table" style="margin-top:0.5rem;">
+        <thead><tr><th>File</th><th>Change</th></tr></thead>
+        <tbody>
+          <tr><td><code>packages/cms/src/optional.ts</code></td><td>Added Urban only / Rural only to <code>contentFilterOptions</code>. Fixed <code>??&nbsp;[]</code> → <code>??&nbsp;contentFilterOptions</code> so local defaults survive when <code>@oky/core</code> does not export the field.</td></tr>
+          <tr><td><code>packages/cms/src/views/Subcategory.ejs</code></td><td>Added <code>contentFilterOptions, ageRestrictionOptions</code> to the <code>ArticleModal</code> include call.</td></tr>
+          <tr><td><code>packages/cms/src/views/Encyclopedia.ejs</code></td><td>Same include fix as <code>Subcategory.ejs</code>.</td></tr>
+          <tr><td><code>packages/cms/src/views/modals/ArticleModal.ejs</code></td><td>Restructured modal body from horizontal row to vertical stacked layout. Added Filter and Age Restriction dropdowns with EJS option loops.</td></tr>
+          <tr><td><code>packages/cms/src/public/scripts/subcategoryViewScript.js</code></td><td>Added <code>contentFilter</code> and <code>ageRestrictionLevel</code> to article save payload. Added Filter column to DataTable column definitions.</td></tr>
+        </tbody>
+      </table>
       <h3>API changes</h3>
       <div class="placeholder">To be completed — endpoint and data model changes.</div>
       <h3>App changes</h3>
