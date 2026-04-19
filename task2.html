@@ -89,9 +89,19 @@
         </tbody>
       </table>
       <h3>API changes</h3>
-      <div class="placeholder">To be completed — endpoint and data model changes.</div>
+      <p>No new API changes were required. The <code>contentFilter</code> field already exists in the data pipeline:</p>
+      <table class="info-table" style="margin-top:0.5rem;">
+        <thead><tr><th>File</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><code>packages/cms/src/entity/Article.ts</code></td><td>Column already declared on the Article entity</td></tr>
+          <tr><td><code>packages/core/src/api/types.ts</code></td><td><code>contentFilter?: number</code> already in the API response type</td></tr>
+          <tr><td><code>packages/core/src/mappers/encyclopedia.ts</code></td><td>Already mapped: <code>contentFilter: item?.contentFilter</code></td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:0.75rem;">The field was already wired end-to-end — it just wasn't being set correctly from the CMS form, which is what the CMS changes above fix.</p>
+
       <h3>App changes</h3>
-      <div class="placeholder">To be completed — encyclopedia filtering logic.</div>
+      <div class="placeholder">In progress — filter encyclopedia entries in the app based on the user's urban/rural area selection at registration. The <code>contentFilter</code> value is now available in the API response; the app-side filtering logic is next.</div>
     </div>
 
     <div class="card">
