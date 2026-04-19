@@ -480,3 +480,85 @@ footer a:hover { text-decoration: underline; }
   transition: transform 0.2s ease;
 }
 .accordion-body { padding: 0 28px 24px; }
+
+/* ── Chapter progress bar (in navbar) ── */
+.chapter-bar {
+  height: 3px;
+  background: rgba(255,255,255,0.2);
+  width: 100%;
+}
+.chapter-bar-fill {
+  height: 100%;
+  background: rgba(255,255,255,0.85);
+  border-radius: 0 2px 2px 0;
+}
+
+/* ── Chapter label (above hero title) ── */
+.chapter-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  opacity: 0.7;
+  margin-bottom: 10px;
+}
+
+/* ── Next chapter panel ── */
+.next-chapter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  border-radius: 16px;
+  padding: 28px 36px;
+  margin-bottom: 20px;
+  color: white;
+  transition: transform 0.15s, box-shadow 0.15s;
+  gap: 20px;
+}
+.next-chapter:hover { transform: translateY(-3px); }
+.next-chapter .nc-body { flex: 1; }
+.next-chapter .nc-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  opacity: 0.7;
+  margin-bottom: 6px;
+}
+.next-chapter .nc-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+.next-chapter .nc-desc {
+  font-size: 0.88rem;
+  opacity: 0.85;
+  line-height: 1.55;
+  max-width: 520px;
+}
+.next-chapter .nc-arrow {
+  font-size: 2rem;
+  opacity: 0.6;
+  flex-shrink: 0;
+  transition: opacity 0.15s, transform 0.15s;
+}
+.next-chapter:hover .nc-arrow { opacity: 1; transform: translateX(5px); }
+
+.next-chapter.to-task1 {
+  background: linear-gradient(135deg, var(--danger) 0%, #c84b7a 100%);
+  box-shadow: 0 4px 20px rgba(227,98,155,0.35);
+}
+.next-chapter.to-task2 {
+  background: linear-gradient(135deg, var(--tertiary) 0%, #1169BF 100%);
+  box-shadow: 0 4px 20px rgba(61,164,221,0.35);
+}
+.next-chapter.to-task3 {
+  background: linear-gradient(135deg, var(--secondary) 0%, #BD6600 100%);
+  box-shadow: 0 4px 20px rgba(255,140,0,0.35);
+}
+.next-chapter.to-overview {
+  background: linear-gradient(135deg, #555 0%, #333 100%);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
