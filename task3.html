@@ -48,37 +48,6 @@
         </iframe>
       </div>
 
-      <h3>Preparation notes — video script bullets</h3>
-
-      <h3 style="color:var(--tertiary);margin-top:18px;">1. What the change does and how it does it</h3>
-      <ul style="font-size:0.9rem;line-height:1.9;color:#444;padding-left:20px;margin-bottom:6px;">
-        <li>On iPhone, tapping Edit Profile could crash the app — no warning, just kicked out</li>
-        <li>The app was trying to display your profile details before they had fully loaded into memory</li>
-        <li>It reached for the data, found nothing, and didn't know what to do — so it crashed</li>
-        <li>The fix teaches the app to check first: <em>do I actually have this person's details?</em></li>
-        <li>If yes — opens normally. If not — waits quietly instead of crashing</li>
-        <li>User stays inside the app either way</li>
-      </ul>
-
-      <h3 style="color:var(--secondary);margin-top:18px;">2. Issues to raise before approving</h3>
-      <ul style="font-size:0.9rem;line-height:1.9;color:#444;padding-left:20px;margin-bottom:6px;">
-        <li>The fix shows a <strong>blank screen</strong> when data isn't ready — safe, but silent</li>
-        <li>For a girl aged 10 tapping Edit Profile and seeing nothing, blank = broken. She doesn't know if the app is loading, frozen, or has lost her data</li>
-        <li>A loading indicator or a gentle "just a moment" message would be far less alarming for this age group</li>
-        <li>The crash is fixed — but <em>why</em> the data arrives null isn't explained or addressed. If it's a logout race condition, it could surface elsewhere in the app</li>
-        <li>No mention of testing on an actual device against the specific crash scenario — important for an iOS-specific bug</li>
-      </ul>
-
-      <h3 style="color:var(--primary-dark);margin-top:18px;">3. Approve or request changes — feedback to the dev</h3>
-      <ul style="font-size:0.9rem;line-height:1.9;color:#444;padding-left:20px;margin-bottom:6px;">
-        <li>Removing the <code>as User</code> cast is correct — it was hiding a real null from TypeScript and masking the bug</li>
-        <li>The null guard in <code>useMemo</code> and the early return are clean and right</li>
-        <li>The fallback state in <code>useReducer</code> is dead code — the early return fires first so those values are never used. Remove or comment it</li>
-        <li>Replace <code>return null</code> with a loading spinner — returning nothing is not appropriate UX for this audience</li>
-        <li>Raise a follow-up ticket: what causes the null? Race condition on logout? That underlying issue needs its own fix</li>
-        <li><strong>Decision: request changes</strong> — the crash fix is correct and should go in, but not before the blank screen is replaced with a loading state and the dead code is cleaned up</li>
-      </ul>
-
     </div>
 
     <div class="card">
