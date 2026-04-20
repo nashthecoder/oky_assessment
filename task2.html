@@ -33,15 +33,6 @@
     </div>
 
     <div class="card">
-      <h2>📋 What to Build</h2>
-      <ol class="steps">
-        <li><span class="step-num">1</span><span><strong>CMS:</strong> Add a field to encyclopaedia entries — <em>Urban only</em>, <em>Rural only</em>, or <em>All users</em>.</span></li>
-        <li><span class="step-num">2</span><span><strong>API:</strong> Expose the new field in the encyclopaedia endpoint.</span></li>
-        <li><span class="step-num">3</span><span><strong>App:</strong> Filter encyclopaedia entries based on the logged-in user's area selection at registration.</span></li>
-      </ol>
-    </div>
-
-    <div class="card">
       <h2>🏗️ Approach</h2>
       <h3>CMS changes</h3>
       <ol class="steps">
@@ -101,7 +92,7 @@
       <p style="margin-top:0.75rem;">The field was already wired end-to-end — it just wasn't being set correctly from the CMS form, which is what the CMS changes above fix.</p>
 
       <h3>App changes</h3>
-      <div class="placeholder">In progress — filter encyclopedia entries in the app based on the user's urban/rural area selection at registration. The <code>contentFilter</code> value is now available in the API response; the app-side filtering logic is next.</div>
+      <p style="font-size:0.9rem;color:#555;">The <code>contentFilter</code> value is available in the API response and correctly set from the CMS. The app reads the logged-in user's area type at registration and filters encyclopedia entries accordingly — confirmed working end-to-end in the demo video below.</p>
     </div>
 
     <!-- Additional bug found -->
@@ -131,12 +122,7 @@
       <p style="background:rgba(255,140,0,0.1);border-left:3px solid var(--secondary);padding:10px 14px;border-radius:6px;font-size:0.88rem;margin-bottom:16px;">
         <strong>Note:</strong> A single continuous video was not possible — testing was done on a physical phone, and this laptop cannot run an iOS/Android simulator. The demo is split across two recordings: a Loom screen capture of the CMS, and a phone recording of the app. Both are provided below.
       </p>
-      <ol class="steps">
-        <li><span class="step-num">1</span><strong>Loom — CMS:</strong> Both articles live — <strong>Menstruation and menstrual cycle → Menstruation and periods</strong>: "Managing period pain without a pharmacy nearby" (Rural only) &amp; <strong>Periods and life → Encouragement</strong>: "Understanding period cramps" (All users)</li>
-        <li><span class="step-num">2</span><strong>Phone — App:</strong> User registers as <strong>rural</strong> → sees both entries; logs out; registers as <strong>urban</strong> → sees only "Understanding period cramps"</li>
-      </ol>
-
-      <h3 style="margin-top:20px;">Video 1 — CMS walkthrough (Loom)</h3>
+      <h3 style="margin-top:4px;">Video 1 — CMS walkthrough (Loom)</h3>
       <div style="position:relative;padding-bottom:56.25%;height:0;border-radius:10px;overflow:hidden;margin-top:10px;">
         <iframe
           src="https://www.loom.com/embed/c05f9502d6f94fe7b51c4dbe6dda4d5f"
@@ -159,18 +145,6 @@
       </div>
     </div>
 
-    <div class="card">
-      <h2>📎 Artefacts</h2>
-      <table class="info-table">
-        <thead><tr><th>Item</th><th>Link / Location</th></tr></thead>
-        <tbody>
-          <tr><td>Video 1 — Loom (CMS walkthrough)</td><td><a href="https://www.loom.com/share/c05f9502d6f94fe7b51c4dbe6dda4d5f" style="color:var(--link);" target="_blank">Watch on Loom</a></td></tr>
-          <tr><td>Video 2 — Phone recording (app filtering demo)</td><td>Embedded above — rural &amp; urban user view</td></tr>
-<tr><td>Proposed CMS navigation UI</td><td>Embedded below</td></tr>
-        </tbody>
-      </table>
-    </div>
-
     <div class="card accordion-card">
       <div class="accordion-header" onclick="toggleAccordion(this)">
         <h2 style="margin:0;">🎨 Proposal — CMS Navigation UI Improvement</h2>
@@ -183,23 +157,6 @@
             src="cms-ui-proposal.html"
             style="width: 100%; height: 100%; border: none; display: block;"
             title="Proposed CMS navigation UI"
-          ></iframe>
-        </div>
-      </div>
-    </div>
-
-    <div class="card accordion-card">
-      <div class="accordion-header" onclick="toggleAccordion(this)">
-        <h2 style="margin:0;">📋 Sample Test Content — Rural only &amp; All users</h2>
-        <span class="accordion-arrow">▼</span>
-      </div>
-      <div class="accordion-body">
-        <p style="margin-top:1rem;">Two articles used for the Task 2 demo video. Enter these into the CMS to demonstrate the urban/rural content filter working end-to-end.</p>
-        <div style="margin-top: 1.5rem; border: 2px solid rgba(255,255,255,0.15); border-radius: 8px; overflow: hidden; height: 80vh; min-height: 600px;">
-          <iframe
-            src="task2-sample-content.html"
-            style="width: 100%; height: 100%; border: none; display: block;"
-            title="Task 2 sample content"
           ></iframe>
         </div>
       </div>
