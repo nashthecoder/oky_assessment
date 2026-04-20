@@ -195,6 +195,20 @@
       </div>
     </div>
 
+    <!-- Onboarding observation callout -->
+    <div class="card" style="border-left: 4px solid var(--primary); background: rgba(151,200,0,0.04);">
+      <h2 style="color: var(--primary-dark);">🌍 What this setup experience reveals</h2>
+      <p style="font-size:0.9rem;color:#444;line-height:1.75;margin-bottom:12px;">
+        Getting this repo running took considerably longer than the task itself. Five separate blockers, none documented anywhere. Docker failed with no minimum version warning and no alternative path. <code>yarn modules</code> failed on every clean clone due to a script bug. The CMS workspace name in every how-to is wrong. The Expo SDK requirement isn't mentioned. The build order for <code>@oky/core</code> isn't in the startup docs.
+      </p>
+      <p style="font-size:0.9rem;color:#444;line-height:1.75;margin-bottom:12px;">
+        Each one stops setup completely. Together they mean a new contributor — trying to localise the app for a partner country on modest hardware — would give up before seeing the app run. For a project with a Digital Public Good designation, deployed across 11 countries, that's a real barrier, not just a convenience issue.
+      </p>
+      <p style="font-size:0.85rem;color:#777;line-height:1.65;border-top:1px solid var(--border);padding-top:10px;margin-top:4px;">
+        <strong>Caveat:</strong> Testing was on the <code>for-tests</code> branch, macOS 12.7.6, without Docker. Some blockers (Docker, Expo SDK) are environment-specific. Others — the submodule script bug, the workspace name, the build order — are not branch-specific. The five bugs below are documented in detail, with fixes applied. See <a href="reflections.html" style="color:var(--link);">Reflections</a> for the broader observation on what this means for DPG compliance and partner onboarding.
+      </p>
+    </div>
+
     <!-- Bugs found -->
     <div class="card">
       <h2>🐛 Bugs &amp; Issues Found in the Repo</h2>

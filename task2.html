@@ -33,6 +33,23 @@
       </div>
     </div>
 
+    <!-- Discovery callout -->
+    <div class="card" style="border-left: 4px solid var(--secondary); background: rgba(255,140,0,0.04);">
+      <h2 style="color: var(--secondary);">🔍 What I found before I could start</h2>
+      <p style="font-size:0.9rem;color:#444;line-height:1.75;margin-bottom:14px;">
+        The urban/rural content filter field already existed in the database and in the API response type — it had been built. But when I opened the CMS to use it, the dropdown was empty. No options appeared. The field accepted no input, and the value was never submitted to the API.
+      </p>
+      <p style="font-size:0.9rem;color:#444;line-height:1.75;margin-bottom:14px;">
+        Tracing it back: <code>contentFilterOptions</code> in <code>packages/cms/src/optional.ts</code> tries to import from <code>@oky/core</code>, but <code>@oky/core</code> doesn't export it. The fallback was <code>?? []</code> — an empty array — so the dropdown silently rendered with nothing. The same file has the same broken pattern for <code>ageRestrictionOptions</code>, except there the empty value crashes the CMS entirely because the database column is typed as integer. No articles could be created at all until that was fixed.
+      </p>
+      <p style="font-size:0.9rem;color:#444;line-height:1.75;margin-bottom:14px;">
+        Two further bugs surfaced during testing — the live toggle silently saves as <code>false</code> regardless of what the editor sets, and the delete button returns a 403 with no visible error. Both are editorial failures: an editor has no way to know their content isn't live or wasn't deleted.
+      </p>
+      <p style="font-size:0.85rem;color:#777;line-height:1.65;border-top:1px solid var(--border);padding-top:10px;margin-top:4px;">
+        <strong>Caveat:</strong> These findings are from the <code>for-tests</code> branch running locally without Docker. I can't confirm whether the same issues reproduce on other branches or in deployed environments — but the root cause in <code>optional.ts</code> is not branch-specific. See <a href="reflections.html" style="color:var(--link);">Reflections</a> for the broader observation on what silent bugs mean for editors in the field.
+      </p>
+    </div>
+
     <div class="card">
       <h2>🏗️ Approach</h2>
       <h3>CMS changes</h3>
