@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reflections — Oky Assessment</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-reflections">
+
+  <div class="navbar">
+    <a class="brand" href="index.html">
+      <div class="logo">🌸</div>
+      <span>Oky Assessment</span>
+    </a>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="task1.html">Task 1</a>
+      <a href="task2.html">Task 2</a>
+      <a href="task3.html">Task 3</a>
+      <a href="reflections.html" class="active">Reflections</a>
+    </nav>
+  </div>
+
+  <div class="page">
+
+    <div class="hero">
+      <h1>Reflections</h1>
+      <p>What three days with the Oky codebase revealed — gaps, observations, and the questions I'd want answered before starting.</p>
+      <div class="meta">
+        <span class="tag">Advisory perspective</span>
+        <span class="tag">TOR §3 &amp; §4</span>
+        <span class="tag">Kilifi, Kenya</span>
+      </div>
+    </div>
+
+    <!-- What the programme needs -->
+    <div class="card">
+      <h2>🔍 What the programme actually needs</h2>
+      <p style="font-size:0.9rem;color:#555;line-height:1.75;margin-bottom:16px;">
+        The technical work in this assessment was straightforward — clone, run, fix, build. What was harder to ignore was everything sitting just beneath it. The app is polished. The CMS is invisible. And in a product that serves girls aged 10 and above across 15 countries, the content pipeline is at least as important as the codebase.
+      </p>
+
+      <div class="bug-card" style="border-left-color: var(--tertiary);">
+        <div class="bug-title" style="color: var(--tertiary);">📂 The CMS has no documentation</div>
+        <p>There is no user guide, no editorial workflow, and no content style guide for the CMS. Country partners and local editors are expected to manage content — create articles, set targeting, publish — with no written reference. During this assessment a content filter field (<em>Urban only / Rural only</em>) was found to be entirely non-functional from the CMS side: the dropdown was empty, the value was never submitted, and no editor would have known the feature existed. It had been invisible since it was built.</p>
+        <div class="bug-propose" style="margin-top:10px;">💡 A CMS documentation audit — covering how to create, edit, and publish content; how targeting and age restrictions work; what the live toggle does and when to use it — is directly within scope under TOR §3 and §4. This is not new policy. It is making existing practice visible, durable, and transferable across staff turnover and 15 country deployments.</div>
+      </div>
+
+      <div class="bug-card" style="border-left-color: var(--secondary); margin-top:12px;">
+        <div class="bug-title" style="color: var(--secondary);">⚠️ Silent bugs are an editorial problem, not just a technical one</div>
+        <p>Two bugs found during Task 2 directly affect content editors — not developers. The live toggle silently saves articles as unpublished regardless of editor input. The delete button silently fails. In both cases the UI gives no feedback. An editor in Nairobi or Jakarta has no way to know their content isn't reaching users. These are not edge cases waiting to be reported — they are happening in production, on every Oky deployment, right now.</p>
+      </div>
+
+      <div class="bug-card" style="border-left-color: var(--primary); margin-top:12px;">
+        <div class="bug-title" style="color: var(--primary-dark);">🌍 Developer onboarding is broken for contributors outside the core team</div>
+        <p>Five blockers hit in first-time setup — none documented anywhere. The README assumes Docker, which fails on older machines common in low-resource settings. The Expo SDK version requirement is undocumented. The workspace name is wrong in every how-to that exists. A new contributor in a partner country, trying to localise or adapt the app, would give up before getting it running. For a Digital Public Good, this is a DPG compliance gap, not just a convenience issue.</p>
+      </div>
+    </div>
+
+    <!-- Why me -->
+    <div class="card">
+      <h2>🙋🏾‍♀️ Why I am the right person for this</h2>
+      <p style="font-size:0.9rem;color:#555;line-height:1.75;margin-bottom:16px;">
+        This role asks for someone who can hold the technical and the human simultaneously — who understands what a React Native monorepo is and also understands why a 13-year-old girl in a rural Kenyan county needs the app to tell her something different than a girl in Nairobi. I live and work at that intersection.
+      </p>
+      <table class="info-table">
+        <tbody>
+          <tr>
+            <td style="width:200px;font-weight:700;">On the ground</td>
+            <td>Based in Kilifi, Kenya — not advising from a distance. The communities Oky serves are the communities I work in and with through Mama Tech Africa.</td>
+          </tr>
+          <tr>
+            <td style="font-weight:700;">Technical fluency</td>
+            <td>Comfortable in the codebase — found and fixed bugs in CMS, EJS templates, TypeScript, and the database within the assessment window. Can read a PR diff and give feedback that a developer can act on.</td>
+          </tr>
+          <tr>
+            <td style="font-weight:700;">Content and community lens</td>
+            <td>I ask: who is this for, and does it reach them? The urban/rural filter fix matters not because it was broken code but because a rural girl seeing the same content as an urban girl is a missed opportunity for relevance and trust.</td>
+          </tr>
+          <tr>
+            <td style="font-weight:700;">Documentation as strategy</td>
+            <td>Every proposal in this assessment — CONTRIBUTING, SECURITY, SETUP_LOG, README — was written to survive staff turnover and scale across countries. That is how I think about documentation: not as a task to complete, but as institutional memory.</td>
+          </tr>
+          <tr>
+            <td style="font-weight:700;">AI-augmented, not AI-dependent</td>
+            <td>Claude Code was used throughout this assessment as a technical partner — for troubleshooting, documentation generation, and building these pages. This is how I work: tools that amplify rigour, fully transparent about what was used and how.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Questions -->
+    <div class="card">
+      <h2>❓ Questions I would want answered before starting</h2>
+      <p style="font-size:0.9rem;color:#555;line-height:1.75;margin-bottom:16px;">
+        These are not doubts — they are the assumptions I have made that need testing. Getting them wrong early wastes everyone's time.
+      </p>
+
+      <h3 style="color:var(--tertiary);">On the CMS and content</h3>
+      <ol class="steps">
+        <li><span class="step-num">1</span><span>Who currently owns the CMS in each country deployment — is there a designated content editor per country, or does the DCOE team manage content centrally?</span></li>
+        <li><span class="step-num">2</span><span>What is the current process for a country partner to request a new article, category, or translation — is there a workflow, or is it ad hoc?</span></li>
+        <li><span class="step-num">3</span><span>Has the urban/rural content filter been intentionally unused across deployments, or was it simply undiscovered? Are there country teams who have been asking for this kind of targeting?</span></li>
+        <li><span class="step-num">4</span><span>Is there a health or clinical review process before articles go live — and if so, who owns it and where is it documented?</span></li>
+        <li><span class="step-num">5</span><span>What is the reading-age standard for content? Is there a tone guide? The app serves girls from age 10 — has this been formally documented for content editors?</span></li>
+      </ol>
+
+      <h3 style="color:var(--secondary);margin-top:20px;">On the role and the team</h3>
+      <ol class="steps">
+        <li><span class="step-num">1</span><span>What does "technical advisory" look like in practice — embedded with partners, remote support, or both? What does a typical week look like in this role?</span></li>
+        <li><span class="step-num">2</span><span>What is the relationship between the DCOE tech team and country teams — are countries autonomous in their deployments, or centrally guided on technical decisions?</span></li>
+        <li><span class="step-num">3</span><span>Is documentation within scope to propose and publish directly, or does it go through an approval process? Who has the authority to merge changes to the Oky repo?</span></li>
+        <li><span class="step-num">4</span><span>Of the 15 countries, how many have active, maintained deployments right now? And how many have dedicated local technical contacts?</span></li>
+      </ol>
+
+      <h3 style="color:var(--primary-dark);margin-top:20px;">On the product direction</h3>
+      <ol class="steps">
+        <li><span class="step-num">1</span><span>Is there a product roadmap for the CMS, or is it considered stable and feature-complete? I ask because the urban/rural targeting suggests the architecture anticipates more sophisticated content targeting than is currently in use.</span></li>
+        <li><span class="step-num">2</span><span>What is the team's current thinking on low-bandwidth environments — is offline content access or cached encyclopedia data on the roadmap?</span></li>
+        <li><span class="step-num">3</span><span>Are there known gaps in the app for girls with disabilities or low literacy? Has this been assessed, and is it within scope for this role to raise?</span></li>
+      </ol>
+    </div>
+
+  </div>
+
+  <footer>
+    <p><a href="task3.html">← Task 3</a> &nbsp;|&nbsp; <a href="index.html">Overview</a></p>
+    <p style="margin-top:6px;">Naijeria Toweett &nbsp;·&nbsp; Kilifi, Kenya &nbsp;·&nbsp; April 2026</p>
+  </footer>
+
+</body>
+</html>

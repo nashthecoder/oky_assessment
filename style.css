@@ -95,6 +95,7 @@ body {
 body.page-task1 .navbar { background: linear-gradient(90deg, var(--danger) 0%, #c84b7a 100%); }
 body.page-task2 .navbar { background: linear-gradient(90deg, var(--tertiary) 0%, #1169BF 100%); }
 body.page-task3 .navbar { background: linear-gradient(90deg, var(--secondary) 0%, #BD6600 100%); }
+body.page-reflections .navbar { background: linear-gradient(90deg, var(--primary-dark) 0%, #025c32 100%); }
 
 /* ── Mobile nav ── */
 @media (max-width: 600px) {
