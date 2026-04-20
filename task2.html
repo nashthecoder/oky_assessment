@@ -27,7 +27,7 @@
       <h1>Task 2</h1>
       <p>Modify the app and CMS so the encyclopedia displays different entries depending on whether a user registered as urban or rural.</p>
       <div class="meta">
-        <span class="tag" style="background:rgba(255,255,255,0.25);">Not Started</span>
+        <span class="tag" style="background:rgba(255,255,255,0.25);">In Progress</span>
         <span class="tag">CMS + API + App</span>
       </div>
     </div>
@@ -115,17 +115,42 @@
           <div class="bug-propose">💡 <strong>Proposed:</strong> On modal open for new articles, explicitly set <code>$('#col4TableModal').prop('checked', false)</code> and add a visible label showing current state, so the toggle state is unambiguous before submission.</div>
         </div>
       </div>
+      <div class="bug-card" style="margin-top:12px;">
+        <div class="bug-title">⚠️ Delete article button — UI silently fails (403 Forbidden)</div>
+        <p>Clicking Delete on an article in the DataTable sends a jQuery AJAX <code>DELETE /articles/:id</code> request. The route is correctly wired but the request returns HTTP 403 — the server requires an authenticated session cookie that the AJAX call does not forward correctly. The error handler only calls <code>console.log(error)</code>, so the failure is invisible to the user — the button appears to do nothing.</p>
+        <div class="bug-actions">
+          <div class="bug-fix">✅ <strong>Immediate workaround:</strong> Articles deleted directly via <code>psql</code> — <code>DELETE FROM periodtracker.article WHERE id = ...</code> — to unblock the demo recording.</div>
+          <div class="bug-propose">💡 <strong>Proposed fix:</strong> Forward the session cookie with the AJAX request (or use <code>xhrFields: &#123; withCredentials: true &#125;</code>), and surface the error to the user rather than silently swallowing it.</div>
+        </div>
+      </div>
     </div>
 
     <div class="card">
       <h2>🎥 Demo Video</h2>
-      <p>A single continuous video showing:</p>
+      <p style="background:rgba(255,140,0,0.1);border-left:3px solid var(--secondary);padding:10px 14px;border-radius:6px;font-size:0.88rem;margin-bottom:16px;">
+        <strong>Note:</strong> A single continuous video was not possible — testing was done on a physical phone, and this laptop cannot run an iOS/Android simulator. The demo is split across two recordings: a Loom screen capture of the CMS, and a phone recording of the app. Both are provided below.
+      </p>
       <ol class="steps">
-        <li><span class="step-num">1</span> CMS showing both articles live — <strong>Menstruation and menstrual cycle → Menstruation and periods</strong>: "Managing period pain without a pharmacy nearby" (Rural only) &amp; <strong>Periods and life → Encouragement</strong>: "Understanding period cramps" (All users)</li>
-        <li><span class="step-num">2</span> User registers in the app as <strong>rural</strong> → sees both entries</li>
-        <li><span class="step-num">3</span> Logs out (without stopping the video)</li>
-        <li><span class="step-num">4</span> Registers as <strong>urban</strong> → sees only "Understanding period cramps"</li>
+        <li><span class="step-num">1</span><strong>Loom — CMS:</strong> Both articles live — <strong>Menstruation and menstrual cycle → Menstruation and periods</strong>: "Managing period pain without a pharmacy nearby" (Rural only) &amp; <strong>Periods and life → Encouragement</strong>: "Understanding period cramps" (All users)</li>
+        <li><span class="step-num">2</span><strong>Phone — App:</strong> User registers as <strong>rural</strong> → sees both entries; logs out; registers as <strong>urban</strong> → sees only "Understanding period cramps"</li>
       </ol>
+
+      <h3 style="margin-top:20px;">Video 1 — CMS walkthrough (Loom)</h3>
+      <div style="position:relative;padding-bottom:56.25%;height:0;border-radius:10px;overflow:hidden;margin-top:10px;">
+        <iframe
+          src="https://www.loom.com/embed/c05f9502d6f94fe7b51c4dbe6dda4d5f"
+          frameborder="0"
+          webkitallowfullscreen
+          mozallowfullscreen
+          allowfullscreen
+          style="position:absolute;top:0;left:0;width:100%;height:100%;">
+        </iframe>
+      </div>
+
+      <h3 style="margin-top:20px;">Video 2 — App demo (phone recording)</h3>
+      <div style="background:var(--nav);border-radius:10px;padding:20px;text-align:center;color:#888;font-size:0.88rem;margin-top:10px;">
+        Phone recording — <em>link to be added</em>
+      </div>
     </div>
 
     <div class="card">
@@ -133,7 +158,8 @@
       <table class="info-table">
         <thead><tr><th>Item</th><th>Link / Location</th></tr></thead>
         <tbody>
-          <tr><td>Continuous video — full demo</td><td><em>to be added</em></td></tr>
+          <tr><td>Video 1 — Loom (CMS walkthrough)</td><td><a href="https://www.loom.com/share/c05f9502d6f94fe7b51c4dbe6dda4d5f" style="color:var(--link);" target="_blank">Watch on Loom</a></td></tr>
+          <tr><td>Video 2 — Phone recording (app filtering demo)</td><td><em>link to be added</em></td></tr>
 <tr><td>Proposed CMS navigation UI</td><td>Embedded below</td></tr>
         </tbody>
       </table>
