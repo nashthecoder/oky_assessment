@@ -106,10 +106,11 @@
 
     <!-- Additional bug found -->
     <div class="card">
-      <h2>🐛 Additional Bug Found — Live Toggle on New Articles</h2>
+      <h2>🐛 Bugs Found — Article Creation &amp; Management</h2>
       <div class="bug-card">
         <div class="bug-title">⚠️ Live toggle defaults to <code>false</code> on article creation regardless of user input</div>
         <p>When creating a new article, the modal's live checkbox can silently reset to unchecked before the form is submitted. The toggle appears active in the UI but the underlying checkbox state is read as <code>false</code> on POST. Found during Task 2 testing — "Understanding period cramps" was toggled live but saved with <code>live: false</code> in the database.</p>
+        <p style="margin-top:8px;">This has a knock-on effect: the article appears immediately in the CMS DataTable but does not show in the app until <code>live</code> is manually corrected. From a CMS editor's perspective the article looks published — the delay is silent and there is no feedback explaining why the app is not reflecting the new content.</p>
         <div class="bug-actions">
           <div class="bug-fix">✅ <strong>Immediate fix:</strong> Set <code>live = true</code> directly in the database via <code>psql</code>.</div>
           <div class="bug-propose">💡 <strong>Proposed:</strong> On modal open for new articles, explicitly set <code>$('#col4TableModal').prop('checked', false)</code> and add a visible label showing current state, so the toggle state is unambiguous before submission.</div>
